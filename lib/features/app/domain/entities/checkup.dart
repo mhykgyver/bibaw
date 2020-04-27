@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
-class CheckupRecord extends Equatable {
+class Checkup extends Equatable {
   final String checkupID;
   final DateTime date;
   final double weight;
@@ -11,7 +11,7 @@ class CheckupRecord extends Equatable {
   final String medication;
   final String instructions;
 
-  const CheckupRecord({
+  const Checkup({
     @required this.checkupID,
     @required this.date,
     @required this.weight,

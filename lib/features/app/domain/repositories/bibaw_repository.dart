@@ -1,11 +1,11 @@
-import 'package:bibaw_app/features/app/domain/entities/doctor.dart';
-import 'package:bibaw_app/features/app/domain/entities/hospital.dart';
-import 'package:bibaw_app/features/app/domain/entities/parent.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../entities/checkup_record.dart';
+import '../entities/checkup.dart';
+import '../entities/doctor.dart';
+import '../entities/hospital.dart';
 import '../entities/infant.dart';
+import '../entities/parent.dart';
 
 abstract class BibawRepository {
   // Checkups
@@ -13,8 +13,7 @@ abstract class BibawRepository {
       {String infantID, String doctorID, String hospitalID});
   Future<Either<Failure, bool>> editCheckupRecord({String checkupID});
   Future<Either<Failure, bool>> deleteCheckupRecord({String checkupID});
-  Future<Either<Failure, CheckupRecord>> retrieveCheckupRecord(
-      [String checkupID]);
+  Future<Either<Failure, Checkup>> retrieveCheckupRecord({String checkupID});
 
   // Doctors
   Future<Either<Failure, bool>> addDoctorRecord();
@@ -36,7 +35,7 @@ abstract class BibawRepository {
 
   // Parents
   Future<Either<Failure, bool>> addParentRecord();
-  Future<Either<Failure, bool>> editParentRecord(String parentID);
-  Future<Either<Failure, bool>> deleteParentRecord(String parentID);
+  Future<Either<Failure, bool>> editParentRecord({String parentID});
+  Future<Either<Failure, bool>> deleteParentRecord({String parentID});
   Future<Either<Failure, Parent>> retrieveParentRecord({String parentID});
 }
