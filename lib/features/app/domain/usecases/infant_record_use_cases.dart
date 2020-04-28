@@ -8,7 +8,7 @@ import '../entities/infant.dart';
 import '../repositories/bibaw_repository.dart';
 
 class AddInfantRecord extends UseCase {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   AddInfantRecord({repository}) : _repository = repository;
 
@@ -19,43 +19,43 @@ class AddInfantRecord extends UseCase {
 }
 
 class EditInfantRecord extends UseCase<bool, Params> {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   EditInfantRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.editInfantRecord(infantID: params.infantID);
+    return await _repository.editInfantRecord(infantID: params._infantID);
   }
 }
 
 class DeleteInfantRecord extends UseCase<bool, Params> {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   DeleteInfantRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.deleteInfantRecord(infantID: params.infantID);
+    return await _repository.deleteInfantRecord(infantID: params._infantID);
   }
 }
 
 class RetrieveInfantRecord extends UseCase<Infant, Params> {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   RetrieveInfantRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, Infant>> call(Params params) async {
-    return await _repository.retrieveInfantRecord(infantID: params.infantID);
+    return await _repository.retrieveInfantRecord(infantID: params._infantID);
   }
 }
 
 class Params extends Equatable {
-  final String infantID;
+  final String _infantID;
 
-  const Params({@required this.infantID});
+  const Params({@required infantID}) : _infantID = infantID;
 
   @override
-  List<Object> get props => [infantID];
+  List<Object> get props => [_infantID];
 }

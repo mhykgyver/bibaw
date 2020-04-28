@@ -8,7 +8,7 @@ import '../entities/hospital.dart';
 import '../repositories/bibaw_repository.dart';
 
 class AddHospitalRecord extends UseCase {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   AddHospitalRecord({repository}) : _repository = repository;
 
@@ -19,45 +19,45 @@ class AddHospitalRecord extends UseCase {
 }
 
 class EditHospitalRecord extends UseCase<bool, Params> {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   EditHospitalRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.editHospitalRecord(hospitalID: params.hospitalID);
+    return await _repository.editHospitalRecord(hospitalID: params._hospitalID);
   }
 }
 
 class DeleteHospitalRecord extends UseCase<bool, Params> {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   DeleteHospitalRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
     return await _repository.deleteHospitalRecord(
-        hospitalID: params.hospitalID);
+        hospitalID: params._hospitalID);
   }
 }
 
 class RetrieveHospitalRecord extends UseCase<Hospital, Params> {
-  final BibawRepository _repository;
+  final IBibawRepository _repository;
 
   RetrieveHospitalRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, Hospital>> call(Params params) async {
     return await _repository.retrieveHospitalRecord(
-        hospitalID: params.hospitalID);
+        hospitalID: params._hospitalID);
   }
 }
 
 class Params extends Equatable {
-  final String hospitalID;
+  final String _hospitalID;
 
-  const Params({@required this.hospitalID});
+  const Params({@required hospitalID}) : _hospitalID = hospitalID;
 
   @override
-  List<Object> get props => [hospitalID];
+  List<Object> get props => [_hospitalID];
 }

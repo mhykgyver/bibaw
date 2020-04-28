@@ -3,17 +3,17 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/use_case.dart';
-import '../entities/checkup.dart';
+import '../entities/appointment.dart';
 import '../repositories/bibaw_repository.dart';
 
-class AddCheckupRecord extends UseCase<bool, Params> {
+class AddAppointmentRecord extends UseCase<bool, Params> {
   final IBibawRepository _repository;
 
-  AddCheckupRecord({repository}) : _repository = repository;
+  AddAppointmentRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.addCheckupRecord(
+    return await _repository.addAppointmentRecord(
       doctorID: params._doctorID,
       hospitalID: params._hospitalID,
       infantID: params._infantID,
@@ -21,59 +21,61 @@ class AddCheckupRecord extends UseCase<bool, Params> {
   }
 }
 
-class EditCheckupRecord extends UseCase<bool, Params> {
+class EditAppointmentRecord extends UseCase<bool, Params> {
   final IBibawRepository _repository;
 
-  EditCheckupRecord({repository}) : _repository = repository;
+  EditAppointmentRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.editCheckupRecord(checkupID: params._checkupID);
+    return await _repository.editAppointmentRecord(
+        appointmentID: params._appointmentID);
   }
 }
 
-class DeleteCheckupRecord extends UseCase<bool, Params> {
+class DeleteAppointmentRecord extends UseCase<bool, Params> {
   final IBibawRepository _repository;
 
-  DeleteCheckupRecord({repository}) : _repository = repository;
+  DeleteAppointmentRecord({repository}) : _repository = repository;
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.deleteCheckupRecord(checkupID: params._checkupID);
+    return await _repository.deleteAppointmentRecord(
+        appointmentID: params._appointmentID);
   }
 }
 
-class RetrieveCheckupRecord extends UseCase<Checkup, Params> {
+class RetrieveAppointmentRecord extends UseCase<Appointment, Params> {
   final IBibawRepository _repository;
 
-  RetrieveCheckupRecord({repository}) : _repository = repository;
+  RetrieveAppointmentRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, Checkup>> call(Params params) async {
-    return await _repository.retrieveCheckupRecord(
-        checkupID: params._checkupID);
+  Future<Either<Failure, Appointment>> call(Params params) async {
+    return await _repository.retrieveAppointmentRecord(
+        appointmentID: params._appointmentID);
   }
 }
 
 class Params extends Equatable {
-  final String _checkupID;
+  final String _appointmentID;
   final String _infantID;
   final String _doctorID;
   final String _hospitalID;
 
   const Params({
-    checkupID,
+    appointmentID,
     infantID,
     doctorID,
     hospitalID,
-  })  : _checkupID = checkupID,
+  })  : _appointmentID = appointmentID,
         _infantID = infantID,
         _doctorID = doctorID,
         _hospitalID = hospitalID;
 
   @override
   List<Object> get props => [
-        _checkupID,
+        _appointmentID,
         _infantID,
         _doctorID,
         _hospitalID,

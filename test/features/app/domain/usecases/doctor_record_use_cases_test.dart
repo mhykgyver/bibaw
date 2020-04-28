@@ -8,21 +8,21 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../core/utils/constants.dart';
 
-class MockBibawRepository extends Mock implements BibawRepository {}
+class MockIBibawRepository extends Mock implements IBibawRepository {}
 
 void main() {
-  MockBibawRepository mockBibawRepository;
+  MockIBibawRepository mockIBibawRepository;
   AddDoctorRecord usecaseAdd;
   EditDoctorRecord usecaseEdit;
   DeleteDoctorRecord usecaseDelete;
   RetrieveDoctorRecord usecaseRetrieve;
 
   setUp(() {
-    mockBibawRepository = MockBibawRepository();
-    usecaseAdd = AddDoctorRecord(repository: mockBibawRepository);
-    usecaseEdit = EditDoctorRecord(repository: mockBibawRepository);
-    usecaseDelete = DeleteDoctorRecord(repository: mockBibawRepository);
-    usecaseRetrieve = RetrieveDoctorRecord(repository: mockBibawRepository);
+    mockIBibawRepository = MockIBibawRepository();
+    usecaseAdd = AddDoctorRecord(repository: mockIBibawRepository);
+    usecaseEdit = EditDoctorRecord(repository: mockIBibawRepository);
+    usecaseDelete = DeleteDoctorRecord(repository: mockIBibawRepository);
+    usecaseRetrieve = RetrieveDoctorRecord(repository: mockIBibawRepository);
   });
 
   final tDoctorID = kDoctorID;
@@ -30,32 +30,32 @@ void main() {
   group('doctor record use cases', () {
     // add doctor record test
     test('should add new doctor record to repository', () async {
-      when(mockBibawRepository.addDoctorRecord())
+      when(mockIBibawRepository.addDoctorRecord())
           .thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(NoParams());
       expect(result, Right(true));
-      verify(mockBibawRepository.addDoctorRecord());
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.addDoctorRecord());
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit doctor record test
     test('should edit existing doctor record in repository', () async {
-      when(mockBibawRepository.editDoctorRecord(doctorID: tDoctorID))
+      when(mockIBibawRepository.editDoctorRecord(doctorID: tDoctorID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(doctorID: tDoctorID));
       expect(result, Right(true));
-      verify(mockBibawRepository.editDoctorRecord(doctorID: tDoctorID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.editDoctorRecord(doctorID: tDoctorID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Delete doctor record test
     test('should delete existing doctor record in repository', () async {
-      when(mockBibawRepository.deleteDoctorRecord(doctorID: tDoctorID))
+      when(mockIBibawRepository.deleteDoctorRecord(doctorID: tDoctorID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseDelete(Params(doctorID: tDoctorID));
       expect(result, Right(true));
-      verify(mockBibawRepository.deleteDoctorRecord(doctorID: tDoctorID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.deleteDoctorRecord(doctorID: tDoctorID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // retrieve doctor record
@@ -66,12 +66,12 @@ void main() {
       practice: 'Obstetrician',
     );
     test('should retrieve doctor record from repository', () async {
-      when(mockBibawRepository.retrieveDoctorRecord(doctorID: tDoctorID))
+      when(mockIBibawRepository.retrieveDoctorRecord(doctorID: tDoctorID))
           .thenAnswer((_) async => Right(tDoctor));
       final result = await usecaseRetrieve(Params(doctorID: tDoctorID));
       expect(result, Right(tDoctor));
-      verify(mockBibawRepository.retrieveDoctorRecord(doctorID: tDoctorID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.retrieveDoctorRecord(doctorID: tDoctorID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
   });
 }

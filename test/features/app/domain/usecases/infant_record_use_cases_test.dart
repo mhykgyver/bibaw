@@ -8,21 +8,21 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../core/utils/constants.dart';
 
-class MockBibawRepository extends Mock implements BibawRepository {}
+class MockIBibawRepository extends Mock implements IBibawRepository {}
 
 void main() {
-  MockBibawRepository mockBibawRepository;
+  MockIBibawRepository mockIBibawRepository;
   AddInfantRecord usecaseAdd;
   EditInfantRecord usecaseEdit;
   DeleteInfantRecord usecaseDelete;
   RetrieveInfantRecord usecaseRetrieve;
 
   setUp(() {
-    mockBibawRepository = MockBibawRepository();
-    usecaseAdd = AddInfantRecord(repository: mockBibawRepository);
-    usecaseEdit = EditInfantRecord(repository: mockBibawRepository);
-    usecaseDelete = DeleteInfantRecord(repository: mockBibawRepository);
-    usecaseRetrieve = RetrieveInfantRecord(repository: mockBibawRepository);
+    mockIBibawRepository = MockIBibawRepository();
+    usecaseAdd = AddInfantRecord(repository: mockIBibawRepository);
+    usecaseEdit = EditInfantRecord(repository: mockIBibawRepository);
+    usecaseDelete = DeleteInfantRecord(repository: mockIBibawRepository);
+    usecaseRetrieve = RetrieveInfantRecord(repository: mockIBibawRepository);
   });
 
   final tInfantID = kInfantID;
@@ -30,32 +30,32 @@ void main() {
   group('infant record use cases', () {
     // add infant record test
     test('should add new infant record to repository', () async {
-      when(mockBibawRepository.addInfantRecord())
+      when(mockIBibawRepository.addInfantRecord())
           .thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(NoParams());
       expect(result, Right(true));
-      verify(mockBibawRepository.addInfantRecord());
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.addInfantRecord());
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit infant record test
     test('should edit existing infant record in repository', () async {
-      when(mockBibawRepository.editInfantRecord(infantID: tInfantID))
+      when(mockIBibawRepository.editInfantRecord(infantID: tInfantID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(infantID: tInfantID));
       expect(result, Right(true));
-      verify(mockBibawRepository.editInfantRecord(infantID: tInfantID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.editInfantRecord(infantID: tInfantID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Delete infant record test
     test('should delete existing infant record in repository', () async {
-      when(mockBibawRepository.deleteInfantRecord(infantID: tInfantID))
+      when(mockIBibawRepository.deleteInfantRecord(infantID: tInfantID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseDelete(Params(infantID: tInfantID));
       expect(result, Right(true));
-      verify(mockBibawRepository.deleteInfantRecord(infantID: tInfantID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.deleteInfantRecord(infantID: tInfantID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // retrieve infant record
@@ -70,12 +70,12 @@ void main() {
         circumferenceHead: 33.1,
         parentID: kParentID);
     test('should retrieve infant record from repository', () async {
-      when(mockBibawRepository.retrieveInfantRecord(infantID: tInfantID))
+      when(mockIBibawRepository.retrieveInfantRecord(infantID: tInfantID))
           .thenAnswer((_) async => Right(tInfant));
       final result = await usecaseRetrieve(Params(infantID: tInfantID));
       expect(result, Right(tInfant));
-      verify(mockBibawRepository.retrieveInfantRecord(infantID: tInfantID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.retrieveInfantRecord(infantID: tInfantID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
   });
 }

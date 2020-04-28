@@ -8,21 +8,21 @@ import 'package:mockito/mockito.dart';
 
 import '../../../../core/utils/constants.dart';
 
-class MockBibawRepository extends Mock implements BibawRepository {}
+class MockIBibawRepository extends Mock implements IBibawRepository {}
 
 void main() {
-  MockBibawRepository mockBibawRepository;
+  MockIBibawRepository mockIBibawRepository;
   AddHospitalRecord usecaseAdd;
   EditHospitalRecord usecaseEdit;
   DeleteHospitalRecord usecaseDelete;
   RetrieveHospitalRecord usecaseRetrieve;
 
   setUp(() {
-    mockBibawRepository = MockBibawRepository();
-    usecaseAdd = AddHospitalRecord(repository: mockBibawRepository);
-    usecaseEdit = EditHospitalRecord(repository: mockBibawRepository);
-    usecaseDelete = DeleteHospitalRecord(repository: mockBibawRepository);
-    usecaseRetrieve = RetrieveHospitalRecord(repository: mockBibawRepository);
+    mockIBibawRepository = MockIBibawRepository();
+    usecaseAdd = AddHospitalRecord(repository: mockIBibawRepository);
+    usecaseEdit = EditHospitalRecord(repository: mockIBibawRepository);
+    usecaseDelete = DeleteHospitalRecord(repository: mockIBibawRepository);
+    usecaseRetrieve = RetrieveHospitalRecord(repository: mockIBibawRepository);
   });
 
   final tHospitalID = kHospitalID;
@@ -30,32 +30,33 @@ void main() {
   group('hospital record use cases', () {
     // add hospital record test
     test('should add new hospital record to repository', () async {
-      when(mockBibawRepository.addHospitalRecord())
+      when(mockIBibawRepository.addHospitalRecord())
           .thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(NoParams());
       expect(result, Right(true));
-      verify(mockBibawRepository.addHospitalRecord());
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.addHospitalRecord());
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit hospital record test
     test('should edit existing hospital record in repository', () async {
-      when(mockBibawRepository.editHospitalRecord(hospitalID: tHospitalID))
+      when(mockIBibawRepository.editHospitalRecord(hospitalID: tHospitalID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(hospitalID: tHospitalID));
       expect(result, Right(true));
-      verify(mockBibawRepository.editHospitalRecord(hospitalID: tHospitalID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(mockIBibawRepository.editHospitalRecord(hospitalID: tHospitalID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Delete hospital record test
     test('should delete existing hospital record in repository', () async {
-      when(mockBibawRepository.deleteHospitalRecord(hospitalID: tHospitalID))
+      when(mockIBibawRepository.deleteHospitalRecord(hospitalID: tHospitalID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseDelete(Params(hospitalID: tHospitalID));
       expect(result, Right(true));
-      verify(mockBibawRepository.deleteHospitalRecord(hospitalID: tHospitalID));
-      verifyNoMoreInteractions(mockBibawRepository);
+      verify(
+          mockIBibawRepository.deleteHospitalRecord(hospitalID: tHospitalID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // retrieve hospital record
@@ -66,13 +67,13 @@ void main() {
       room: '721',
     );
     test('should retrieve hospital record from repository', () async {
-      when(mockBibawRepository.retrieveHospitalRecord(hospitalID: tHospitalID))
+      when(mockIBibawRepository.retrieveHospitalRecord(hospitalID: tHospitalID))
           .thenAnswer((_) async => Right(tHospital));
       final result = await usecaseRetrieve(Params(hospitalID: tHospitalID));
       expect(result, Right(tHospital));
       verify(
-          mockBibawRepository.retrieveHospitalRecord(hospitalID: tHospitalID));
-      verifyNoMoreInteractions(mockBibawRepository);
+          mockIBibawRepository.retrieveHospitalRecord(hospitalID: tHospitalID));
+      verifyNoMoreInteractions(mockIBibawRepository);
     });
   });
 }
