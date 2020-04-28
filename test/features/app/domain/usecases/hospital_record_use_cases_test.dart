@@ -65,6 +65,7 @@ void main() {
       location: 'Alabang',
       name: 'Asian Medical Center',
       room: '721',
+      contactNo: '123456789',
     );
     test('should retrieve hospital record from repository', () async {
       when(mockIBibawRepository.retrieveHospitalRecord(hospitalID: tHospitalID))

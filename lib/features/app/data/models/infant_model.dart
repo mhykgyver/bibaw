@@ -1,0 +1,47 @@
+import 'package:bibaw_app/features/app/domain/entities/infant.dart';
+import 'package:flutter/widgets.dart';
+
+class InfantModel extends Infant {
+  const InfantModel({
+    @required infantID,
+    @required firstName,
+    @required lastName,
+    middleInitial,
+    @required gender,
+    @required birthDate,
+    birthPlace,
+    @required weight,
+    @required height,
+    @required circumferenceHead,
+    circumferenceChest,
+    circumferenceAbdominal,
+    scoreAPGAR,
+    birthProblems,
+    distinguishingMarks,
+    deliveryType,
+    @required parentID,
+    obstetricianID,
+    pediatricianID,
+    hospitalID,
+  }) : super(
+            infantID: infantID,
+            firstName: firstName,
+            lastName: lastName,
+            middleInitial: middleInitial,
+            gender: gender,
+            birthDate: birthDate,
+            birthPlace: birthPlace,
+            weight: weight,
+            height: height,
+            circumferenceHead: circumferenceHead,
+            circumferenceChest: circumferenceChest,
+            circumferenceAbdominal: circumferenceAbdominal,
+            scoreAPGAR: scoreAPGAR,
+            birthProblems: birthProblems,
+            distinguishingMarks: distinguishingMarks,
+            deliveryType: deliveryType,
+            parentID: parentID,
+            obstetricianID: obstetricianID,
+            pediatricianID: pediatricianID,
+            hospitalID: hospitalID);
+}

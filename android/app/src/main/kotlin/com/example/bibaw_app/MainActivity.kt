@@ -1,4 +1,4 @@
-package com.example.bibaw_app
+package com.michaelmanasan.bibaw_app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

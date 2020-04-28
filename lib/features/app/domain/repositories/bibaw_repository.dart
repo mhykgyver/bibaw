@@ -1,4 +1,5 @@
 import 'package:bibaw_app/features/app/domain/entities/appointment.dart';
+import 'package:bibaw_app/features/app/domain/entities/doctor_hospital.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
@@ -29,6 +30,18 @@ abstract class IBibawRepository {
   Future<Either<Failure, bool>> editDoctorRecord({String doctorID});
   Future<Either<Failure, bool>> deleteDoctorRecord({String doctorID});
   Future<Either<Failure, Doctor>> retrieveDoctorRecord({String doctorID});
+
+  // Doctor Hospitals
+  Future<Either<Failure, bool>> addDoctorHospitalRecord({
+    String doctorID,
+    String hospitalID,
+    String consultationDaysHours,
+    String contactNo,
+  });
+  Future<Either<Failure, bool>> editDoctorHospitalRecord({String doctorID});
+  Future<Either<Failure, bool>> deleteDoctorHospitalRecord({String doctorID});
+  Future<Either<Failure, DoctorHospital>> retrieveDoctorHospitalRecord(
+      {String doctorID});
 
   // Hospitals
   Future<Either<Failure, bool>> addHospitalRecord();

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "949875032947",
+    "firebase_url": "https://bibaw-ac22d.firebaseio.com",
+    "project_id": "bibaw-ac22d",
+    "storage_bucket": "bibaw-ac22d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949875032947:android:b3231aa361a9c53cfdfb06",
+        "android_client_info": {
+          "package_name": "com.michaelmanasan.bibaw_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949875032947-in26rpi8epihinp69j8f0qu3ig4rb558.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.michaelmanasan.bibaw_app",
+            "certificate_hash": "677f3f4866f2c8865c714e69d40138605dffb114"
+          }
+        },
+        {
+          "client_id": "949875032947-dioii7sr8hn18u31igg67dlig13bbk9t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVjSpX4Y1CS55ghy7yMu3nN5aAYOB_MD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949875032947-dioii7sr8hn18u31igg67dlig13bbk9t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,16 +6,19 @@ class Hospital extends Equatable {
   final String _name;
   final String _location;
   final String _room;
+  final String _contactNo;
 
   const Hospital({
     @required hospitalID,
     @required name,
     @required location,
     @required room,
+    @required contactNo,
   })  : _hospitalID = hospitalID,
         _name = name,
         _location = location,
-        _room = room;
+        _room = room,
+        _contactNo = contactNo;
 
   @override
   List<Object> get props => [
@@ -23,5 +26,6 @@ class Hospital extends Equatable {
         _name,
         _location,
         _room,
+        _contactNo,
       ];
 }
