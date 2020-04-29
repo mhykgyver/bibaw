@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/use_case.dart';
 import '../entities/doctor.dart';
-import '../repositories/bibaw_repository.dart';
+import '../repositories/bibaw_repository_domain_layer.dart';
 
 class AddDoctorRecord extends UseCase<bool, Params> {
   final IBibawRepository _repository;
