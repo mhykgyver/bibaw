@@ -7,6 +7,7 @@ class Parent extends Equatable {
   final String _lastName;
   final String _middleInitial;
   final DateTime _birthDate;
+  final String _gender;
 
   const Parent({
     @required parentID,
@@ -14,18 +15,21 @@ class Parent extends Equatable {
     @required lastName,
     middleInitial,
     @required birthDate,
+    gender,
   })  : _parentID = parentID,
         _firstName = firstName,
         _lastName = lastName,
         _middleInitial = middleInitial,
-        _birthDate = birthDate;
+        _birthDate = birthDate,
+        _gender = gender;
 
   @override
   List<Object> get props => [
-        _parentID,
+        _birthDate,
         _firstName,
+        _gender,
         _lastName,
         _middleInitial,
-        _birthDate,
+        _parentID,
       ];
 }

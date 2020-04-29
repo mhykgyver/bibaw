@@ -1,4 +1,3 @@
-import 'package:bibaw_app/core/usecases/use_case.dart';
 import 'package:bibaw_app/features/app/domain/entities/hospital.dart';
 import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
 import 'package:bibaw_app/features/app/domain/usecases/hospital_record_use_cases.dart';
@@ -30,21 +29,49 @@ void main() {
   group('hospital record use cases', () {
     // add hospital record test
     test('should add new hospital record to repository', () async {
-      when(mockIBibawRepository.addHospitalRecord())
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseAdd(NoParams());
+      when(mockIBibawRepository.addHospitalRecord(
+        contactNo: '1234567',
+        hospitalID: tHospitalID,
+        location: 'test location',
+        name: 'Test Hospital',
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseAdd(Params(
+        contactNo: '1234567',
+        hospitalID: tHospitalID,
+        location: 'test location',
+        name: 'Test Hospital',
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.addHospitalRecord());
+      verify(mockIBibawRepository.addHospitalRecord(
+        contactNo: '1234567',
+        hospitalID: tHospitalID,
+        location: 'test location',
+        name: 'Test Hospital',
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit hospital record test
     test('should edit existing hospital record in repository', () async {
-      when(mockIBibawRepository.editHospitalRecord(hospitalID: tHospitalID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(hospitalID: tHospitalID));
+      when(mockIBibawRepository.editHospitalRecord(
+        contactNo: '1234567',
+        hospitalID: tHospitalID,
+        location: 'test location',
+        name: 'Test Hospital',
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        contactNo: '1234567',
+        hospitalID: tHospitalID,
+        location: 'test location',
+        name: 'Test Hospital',
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.editHospitalRecord(hospitalID: tHospitalID));
+      verify(mockIBibawRepository.editHospitalRecord(
+        contactNo: '1234567',
+        hospitalID: tHospitalID,
+        location: 'test location',
+        name: 'Test Hospital',
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
@@ -64,7 +91,6 @@ void main() {
       hospitalID: kHospitalID,
       location: 'Alabang',
       name: 'Asian Medical Center',
-      room: '721',
       contactNo: '123456789',
     );
     test('should retrieve hospital record from repository', () async {

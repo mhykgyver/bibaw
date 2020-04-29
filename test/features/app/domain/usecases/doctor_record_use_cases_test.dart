@@ -1,4 +1,3 @@
-import 'package:bibaw_app/core/usecases/use_case.dart';
 import 'package:bibaw_app/features/app/domain/entities/doctor.dart';
 import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
 import 'package:bibaw_app/features/app/domain/usecases/doctor_record_use_cases.dart';
@@ -30,21 +29,55 @@ void main() {
   group('doctor record use cases', () {
     // add doctor record test
     test('should add new doctor record to repository', () async {
-      when(mockIBibawRepository.addDoctorRecord())
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseAdd(NoParams());
+      when(mockIBibawRepository.addDoctorRecord(
+        doctorID: tDoctorID,
+        firstName: 'Doctor',
+        lastName: 'Who',
+        middleInitial: 'X',
+        practice: 'Pediatrician',
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseAdd(Params(
+        doctorID: tDoctorID,
+        firstName: 'Doctor',
+        lastName: 'Who',
+        middleInitial: 'X',
+        practice: 'Pediatrician',
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.addDoctorRecord());
+      verify(mockIBibawRepository.addDoctorRecord(
+        doctorID: tDoctorID,
+        firstName: 'Doctor',
+        lastName: 'Who',
+        middleInitial: 'X',
+        practice: 'Pediatrician',
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit doctor record test
     test('should edit existing doctor record in repository', () async {
-      when(mockIBibawRepository.editDoctorRecord(doctorID: tDoctorID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(doctorID: tDoctorID));
+      when(mockIBibawRepository.editDoctorRecord(
+        doctorID: tDoctorID,
+        firstName: 'Doctor',
+        lastName: 'Who',
+        middleInitial: 'X',
+        practice: 'Pediatrician',
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        doctorID: tDoctorID,
+        firstName: 'Doctor',
+        lastName: 'Who',
+        middleInitial: 'X',
+        practice: 'Pediatrician',
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.editDoctorRecord(doctorID: tDoctorID));
+      verify(mockIBibawRepository.editDoctorRecord(
+        doctorID: tDoctorID,
+        firstName: 'Doctor',
+        lastName: 'Who',
+        middleInitial: 'X',
+        practice: 'Pediatrician',
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 

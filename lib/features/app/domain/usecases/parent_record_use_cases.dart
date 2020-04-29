@@ -7,14 +7,21 @@ import '../../../../core/usecases/use_case.dart';
 import '../entities/parent.dart';
 import '../repositories/bibaw_repository.dart';
 
-class AddParentRecord extends UseCase {
+class AddParentRecord extends UseCase<bool, Params> {
   final IBibawRepository _repository;
 
   AddParentRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(params) async {
-    return await _repository.addParentRecord();
+  Future<Either<Failure, bool>> call(Params params) async {
+    return await _repository.addParentRecord(
+      birthDate: params._birthDate,
+      firstName: params._firstName,
+      gender: params._gender,
+      lastName: params._lastName,
+      middleInitial: params._middleInitial,
+      parentID: params._parentID,
+    );
   }
 }
 
@@ -25,7 +32,14 @@ class EditParentRecord extends UseCase<bool, Params> {
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.editParentRecord(parentID: params._parentID);
+    return await _repository.editParentRecord(
+      birthDate: params._birthDate,
+      firstName: params._firstName,
+      gender: params._gender,
+      lastName: params._lastName,
+      middleInitial: params._middleInitial,
+      parentID: params._parentID,
+    );
   }
 }
 
@@ -52,10 +66,34 @@ class RetrieveParentRecord extends UseCase<Parent, Params> {
 }
 
 class Params extends Equatable {
+  final DateTime _birthDate;
+  final String _firstName;
+  final String _gender;
+  final String _lastName;
+  final String _middleInitial;
   final String _parentID;
 
-  const Params({@required parentID}) : _parentID = parentID;
+  const Params({
+    @required parentID,
+    birthDate,
+    firstName,
+    gender,
+    lastName,
+    middleInitial,
+  })  : _birthDate = birthDate,
+        _firstName = firstName,
+        _gender = gender,
+        _lastName = lastName,
+        _middleInitial = middleInitial,
+        _parentID = parentID;
 
   @override
-  List<Object> get props => [_parentID];
+  List<Object> get props => [
+        _birthDate,
+        _firstName,
+        _gender,
+        _lastName,
+        _middleInitial,
+        _parentID,
+      ];
 }

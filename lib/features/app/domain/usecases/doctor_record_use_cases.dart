@@ -7,14 +7,19 @@ import '../../../../core/usecases/use_case.dart';
 import '../entities/doctor.dart';
 import '../repositories/bibaw_repository.dart';
 
-class AddDoctorRecord extends UseCase {
+class AddDoctorRecord extends UseCase<bool, Params> {
   final IBibawRepository _repository;
 
   AddDoctorRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(params) async {
-    return await _repository.addDoctorRecord();
+  Future<Either<Failure, bool>> call(Params params) async {
+    return await _repository.addDoctorRecord(
+        doctorID: params._doctorID,
+        firstName: params._firstName,
+        lastName: params._lastName,
+        middleInitial: params._middleInitial,
+        practice: params._practice);
   }
 }
 
@@ -25,7 +30,13 @@ class EditDoctorRecord extends UseCase<bool, Params> {
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await _repository.editDoctorRecord(doctorID: params._doctorID);
+    return await _repository.editDoctorRecord(
+      doctorID: params._doctorID,
+      firstName: params._firstName,
+      lastName: params._lastName,
+      middleInitial: params._middleInitial,
+      practice: params._practice,
+    );
   }
 }
 
@@ -53,9 +64,29 @@ class RetrieveDoctorRecord extends UseCase<Doctor, Params> {
 
 class Params extends Equatable {
   final String _doctorID;
+  final String _firstName;
+  final String _lastName;
+  final String _middleInitial;
+  final String _practice;
 
-  const Params({@required doctorID}) : _doctorID = doctorID;
+  const Params({
+    @required doctorID,
+    firstName,
+    lastName,
+    middleInitial,
+    practice,
+  })  : _doctorID = doctorID,
+        _firstName = firstName,
+        _lastName = lastName,
+        _middleInitial = middleInitial,
+        _practice = practice;
 
   @override
-  List<Object> get props => [_doctorID];
+  List<Object> get props => [
+        _doctorID,
+        _firstName,
+        _lastName,
+        _middleInitial,
+        _practice,
+      ];
 }

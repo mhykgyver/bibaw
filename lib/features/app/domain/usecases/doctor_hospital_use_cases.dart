@@ -19,6 +19,7 @@ class AddDoctorHospitalRecord extends UseCase<bool, Params> {
       hospitalID: params._hospitalID,
       consultationDaysHours: params._consultationDaysHours,
       contactNo: params._contactNo,
+      roomNo: params._roomNo,
     );
   }
 }
@@ -31,7 +32,12 @@ class EditDoctorHospitalRecord extends UseCase<bool, Params> {
   @override
   Future<Either<Failure, bool>> call(Params params) async {
     return await _repository.editDoctorHospitalRecord(
-        doctorID: params._doctorID);
+      doctorID: params._doctorID,
+      hospitalID: params._hospitalID,
+      consultationDaysHours: params._consultationDaysHours,
+      contactNo: params._contactNo,
+      roomNo: params._roomNo,
+    );
   }
 }
 
@@ -64,16 +70,19 @@ class Params extends Equatable {
   final String _hospitalID;
   final String _consultationDaysHours;
   final String _contactNo;
+  final String _roomNo;
 
   const Params({
     @required doctorID,
     hospitalID,
     consultationDaysHours,
     contactNo,
+    roomNo,
   })  : _doctorID = doctorID,
         _hospitalID = hospitalID,
         _consultationDaysHours = consultationDaysHours,
-        _contactNo = contactNo;
+        _contactNo = contactNo,
+        _roomNo = roomNo;
 
   @override
   List<Object> get props => [
@@ -81,5 +90,6 @@ class Params extends Equatable {
         _hospitalID,
         _consultationDaysHours,
         _contactNo,
+        _roomNo,
       ];
 }

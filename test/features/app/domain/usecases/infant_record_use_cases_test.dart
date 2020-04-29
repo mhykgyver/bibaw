@@ -1,4 +1,3 @@
-import 'package:bibaw_app/core/usecases/use_case.dart';
 import 'package:bibaw_app/features/app/domain/entities/infant.dart';
 import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
 import 'package:bibaw_app/features/app/domain/usecases/infant_record_use_cases.dart';
@@ -26,25 +25,152 @@ void main() {
   });
 
   final tInfantID = kInfantID;
+  final tParentID = kParentID;
+  final tDoctorID = kDoctorID;
+  final tHospitalID = kHospitalID;
 
   group('infant record use cases', () {
     // add infant record test
     test('should add new infant record to repository', () async {
-      when(mockIBibawRepository.addInfantRecord())
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseAdd(NoParams());
+      when(mockIBibawRepository.addInfantRecord(
+        infantID: tInfantID,
+        firstName: 'Baby',
+        lastName: 'Girl',
+        middleInitial: 'G',
+        gender: 'F',
+        birthDate: DateTime.parse("2017-12-05 20:18:04Z"),
+        birthPlace: 'Test Birth Place',
+        weight: 33.0,
+        height: 80.0,
+        circumferenceHead: 20.0,
+        circumferenceChest: 25.0,
+        circumferenceAbdominal: 22.0,
+        scoreAPGAR: '9,9',
+        birthProblems: 'test problems',
+        distinguishingMarks: 'test marks',
+        deliveryType: 'CS',
+        parentID: tParentID,
+        obstetricianID: tDoctorID,
+        pediatricianID: tDoctorID,
+        hospitalID: tHospitalID,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseAdd(Params(
+        infantID: tInfantID,
+        firstName: 'Baby',
+        lastName: 'Girl',
+        middleInitial: 'G',
+        gender: 'F',
+        birthDate: DateTime.parse("2017-12-05 20:18:04Z"),
+        birthPlace: 'Test Birth Place',
+        weight: 33.0,
+        height: 80.0,
+        circumferenceHead: 20.0,
+        circumferenceChest: 25.0,
+        circumferenceAbdominal: 22.0,
+        scoreAPGAR: '9,9',
+        birthProblems: 'test problems',
+        distinguishingMarks: 'test marks',
+        deliveryType: 'CS',
+        parentID: tParentID,
+        obstetricianID: tDoctorID,
+        pediatricianID: tDoctorID,
+        hospitalID: tHospitalID,
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.addInfantRecord());
+      verify(mockIBibawRepository.addInfantRecord(
+        infantID: tInfantID,
+        firstName: 'Baby',
+        lastName: 'Girl',
+        middleInitial: 'G',
+        gender: 'F',
+        birthDate: DateTime.parse("2017-12-05 20:18:04Z"),
+        birthPlace: 'Test Birth Place',
+        weight: 33.0,
+        height: 80.0,
+        circumferenceHead: 20.0,
+        circumferenceChest: 25.0,
+        circumferenceAbdominal: 22.0,
+        scoreAPGAR: '9,9',
+        birthProblems: 'test problems',
+        distinguishingMarks: 'test marks',
+        deliveryType: 'CS',
+        parentID: tParentID,
+        obstetricianID: tDoctorID,
+        pediatricianID: tDoctorID,
+        hospitalID: tHospitalID,
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit infant record test
     test('should edit existing infant record in repository', () async {
-      when(mockIBibawRepository.editInfantRecord(infantID: tInfantID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(infantID: tInfantID));
+      when(mockIBibawRepository.editInfantRecord(
+        infantID: tInfantID,
+        firstName: 'Baby',
+        lastName: 'Girl',
+        middleInitial: 'G',
+        gender: 'F',
+        birthDate: DateTime.parse("2017-12-05 20:18:04Z"),
+        birthPlace: 'Test Birth Place',
+        weight: 33.0,
+        height: 80.0,
+        circumferenceHead: 20.0,
+        circumferenceChest: 25.0,
+        circumferenceAbdominal: 22.0,
+        scoreAPGAR: '9,9',
+        birthProblems: 'test problems',
+        distinguishingMarks: 'test marks',
+        deliveryType: 'CS',
+        parentID: tParentID,
+        obstetricianID: tDoctorID,
+        pediatricianID: tDoctorID,
+        hospitalID: tHospitalID,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        infantID: tInfantID,
+        firstName: 'Baby',
+        lastName: 'Girl',
+        middleInitial: 'G',
+        gender: 'F',
+        birthDate: DateTime.parse("2017-12-05 20:18:04Z"),
+        birthPlace: 'Test Birth Place',
+        weight: 33.0,
+        height: 80.0,
+        circumferenceHead: 20.0,
+        circumferenceChest: 25.0,
+        circumferenceAbdominal: 22.0,
+        scoreAPGAR: '9,9',
+        birthProblems: 'test problems',
+        distinguishingMarks: 'test marks',
+        deliveryType: 'CS',
+        parentID: tParentID,
+        obstetricianID: tDoctorID,
+        pediatricianID: tDoctorID,
+        hospitalID: tHospitalID,
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.editInfantRecord(infantID: tInfantID));
+      verify(mockIBibawRepository.editInfantRecord(
+        infantID: tInfantID,
+        firstName: 'Baby',
+        lastName: 'Girl',
+        middleInitial: 'G',
+        gender: 'F',
+        birthDate: DateTime.parse("2017-12-05 20:18:04Z"),
+        birthPlace: 'Test Birth Place',
+        weight: 33.0,
+        height: 80.0,
+        circumferenceHead: 20.0,
+        circumferenceChest: 25.0,
+        circumferenceAbdominal: 22.0,
+        scoreAPGAR: '9,9',
+        birthProblems: 'test problems',
+        distinguishingMarks: 'test marks',
+        deliveryType: 'CS',
+        parentID: tParentID,
+        obstetricianID: tDoctorID,
+        pediatricianID: tDoctorID,
+        hospitalID: tHospitalID,
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 

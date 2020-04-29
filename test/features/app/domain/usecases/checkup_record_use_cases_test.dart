@@ -1,6 +1,6 @@
 import 'package:bibaw_app/features/app/domain/entities/checkup.dart';
 import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
-import 'package:bibaw_app/features/app/domain/usecases/checkup_record_use_cases.dart';
+import 'package:bibaw_app/features/app/domain/usecases/checkup_use_cases.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -11,67 +11,105 @@ class MockIBibawRepository extends Mock implements IBibawRepository {}
 
 void main() {
   MockIBibawRepository mockIBibawRepository;
-  AddCheckupRecord usecaseAdd;
-  EditCheckupRecord usecaseEdit;
-  DeleteCheckupRecord usecaseDelete;
-  RetrieveCheckupRecord usecaseRetrieve;
+  AddCheckup usecaseAdd;
+  EditCheckup usecaseEdit;
+  DeleteCheckup usecaseDelete;
+  RetrieveCheckup usecaseRetrieve;
 
   setUp(() {
     mockIBibawRepository = MockIBibawRepository();
-    usecaseAdd = AddCheckupRecord(repository: mockIBibawRepository);
-    usecaseEdit = EditCheckupRecord(repository: mockIBibawRepository);
-    usecaseDelete = DeleteCheckupRecord(repository: mockIBibawRepository);
-    usecaseRetrieve = RetrieveCheckupRecord(repository: mockIBibawRepository);
+    usecaseAdd = AddCheckup(repository: mockIBibawRepository);
+    usecaseEdit = EditCheckup(repository: mockIBibawRepository);
+    usecaseDelete = DeleteCheckup(repository: mockIBibawRepository);
+    usecaseRetrieve = RetrieveCheckup(repository: mockIBibawRepository);
   });
 
   final tCheckupID = kCheckupID;
-  final tInfantID = kInfantID;
-  final tDoctorID = kDoctorID;
-  final tHospitalID = kHospitalID;
 
-  group('checkup record use cases', () {
-    // add checkup record test
-    test('should add new checkup record to repository', () async {
-      when(mockIBibawRepository.addCheckupRecord(
-        infantID: tInfantID,
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+  group('checkup use cases', () {
+    // add checkup test
+    test('should add new checkup to repository', () async {
+      when(mockIBibawRepository.addCheckup(
+        checkupID: tCheckupID,
+        circumferenceHead: 33.0,
+        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        height: 80.0,
+        instructions: 'test instructions',
+        medication: 'test medications',
+        problems: 'test problems',
+        weight: 30.0,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(Params(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
+        checkupID: tCheckupID,
+        circumferenceHead: 33.0,
+        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        height: 80.0,
+        instructions: 'test instructions',
+        medication: 'test medications',
+        problems: 'test problems',
+        weight: 30.0,
       ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.addCheckupRecord(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
+      verify(mockIBibawRepository.addCheckup(
+        checkupID: tCheckupID,
+        circumferenceHead: 33.0,
+        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        height: 80.0,
+        instructions: 'test instructions',
+        medication: 'test medications',
+        problems: 'test problems',
+        weight: 30.0,
       ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
-    // Edit checkup record test
-    test('should edit existing checkup record in repository', () async {
-      when(mockIBibawRepository.editCheckupRecord(checkupID: tCheckupID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(checkupID: tCheckupID));
+    // Edit checkup test
+    test('should edit existing checkup in repository', () async {
+      when(mockIBibawRepository.editCheckup(
+        checkupID: tCheckupID,
+        circumferenceHead: 33.0,
+        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        height: 80.0,
+        instructions: 'test instructions',
+        medication: 'test medications',
+        problems: 'test problems',
+        weight: 30.0,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        checkupID: tCheckupID,
+        circumferenceHead: 33.0,
+        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        height: 80.0,
+        instructions: 'test instructions',
+        medication: 'test medications',
+        problems: 'test problems',
+        weight: 30.0,
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.editCheckupRecord(checkupID: tCheckupID));
+      verify(mockIBibawRepository.editCheckup(
+        checkupID: tCheckupID,
+        circumferenceHead: 33.0,
+        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        height: 80.0,
+        instructions: 'test instructions',
+        medication: 'test medications',
+        problems: 'test problems',
+        weight: 30.0,
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
-    // Delete checkup record test
-    test('should delete existing checkup record in repository', () async {
-      when(mockIBibawRepository.deleteCheckupRecord(checkupID: tCheckupID))
+    // Delete checkup test
+    test('should delete existing checkup in repository', () async {
+      when(mockIBibawRepository.deleteCheckup(checkupID: tCheckupID))
           .thenAnswer((_) async => Right(true));
       final result = await usecaseDelete(Params(checkupID: tCheckupID));
       expect(result, Right(true));
-      verify(mockIBibawRepository.deleteCheckupRecord(checkupID: tCheckupID));
+      verify(mockIBibawRepository.deleteCheckup(checkupID: tCheckupID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
-    // retrieve checkup record
+    // retrieve checkup
     final tCheckup = Checkup(
       checkupID: kCheckupID,
       height: 70.0,
@@ -82,12 +120,12 @@ void main() {
       problems: 'problems test',
       instructions: 'instructions test',
     );
-    test('should retrieve checkup record from repository', () async {
-      when(mockIBibawRepository.retrieveCheckupRecord(checkupID: tCheckupID))
+    test('should retrieve checkup from repository', () async {
+      when(mockIBibawRepository.retrieveCheckup(checkupID: tCheckupID))
           .thenAnswer((_) async => Right(tCheckup));
       final result = await usecaseRetrieve(Params(checkupID: tCheckupID));
       expect(result, Right(tCheckup));
-      verify(mockIBibawRepository.retrieveCheckupRecord(checkupID: tCheckupID));
+      verify(mockIBibawRepository.retrieveCheckup(checkupID: tCheckupID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
   });

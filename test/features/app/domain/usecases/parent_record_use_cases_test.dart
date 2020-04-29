@@ -1,4 +1,3 @@
-import 'package:bibaw_app/core/usecases/use_case.dart';
 import 'package:bibaw_app/features/app/domain/entities/parent.dart';
 import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
 import 'package:bibaw_app/features/app/domain/usecases/parent_record_use_cases.dart';
@@ -30,21 +29,61 @@ void main() {
   group('parent record use cases', () {
     // add parent record test
     test('should add new parent record to repository', () async {
-      when(mockIBibawRepository.addParentRecord())
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseAdd(NoParams());
+      when(mockIBibawRepository.addParentRecord(
+        birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+        firstName: 'Mommy',
+        gender: 'F',
+        lastName: 'Parent',
+        middleInitial: 'P',
+        parentID: tParentID,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseAdd(Params(
+        birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+        firstName: 'Mommy',
+        gender: 'F',
+        lastName: 'Parent',
+        middleInitial: 'P',
+        parentID: tParentID,
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.addParentRecord());
+      verify(mockIBibawRepository.addParentRecord(
+        birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+        firstName: 'Mommy',
+        gender: 'F',
+        lastName: 'Parent',
+        middleInitial: 'P',
+        parentID: tParentID,
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit parent record test
     test('should edit existing parent record in repository', () async {
-      when(mockIBibawRepository.editParentRecord(parentID: tParentID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(parentID: tParentID));
+      when(mockIBibawRepository.editParentRecord(
+        birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+        firstName: 'Mommy',
+        gender: 'F',
+        lastName: 'Parent',
+        middleInitial: 'P',
+        parentID: tParentID,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+        firstName: 'Mommy',
+        gender: 'F',
+        lastName: 'Parent',
+        middleInitial: 'P',
+        parentID: tParentID,
+      ));
       expect(result, Right(true));
-      verify(mockIBibawRepository.editParentRecord(parentID: tParentID));
+      verify(mockIBibawRepository.editParentRecord(
+        birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+        firstName: 'Mommy',
+        gender: 'F',
+        lastName: 'Parent',
+        middleInitial: 'P',
+        parentID: tParentID,
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
@@ -60,10 +99,12 @@ void main() {
 
     // retrieve parent record
     final tParent = Parent(
-      parentID: kParentID,
-      firstName: 'Mommy',
-      lastName: 'Parent',
       birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
+      firstName: 'Mommy',
+      gender: 'F',
+      lastName: 'Parent',
+      middleInitial: 'P',
+      parentID: tParentID,
     );
     test('should retrieve parent record from repository', () async {
       when(mockIBibawRepository.retrieveParentRecord(parentID: tParentID))

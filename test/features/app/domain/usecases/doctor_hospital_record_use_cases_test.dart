@@ -1,6 +1,6 @@
 import 'package:bibaw_app/features/app/domain/entities/doctor_hospital.dart';
 import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
-import 'package:bibaw_app/features/app/domain/usecases/doctor_hospital_record_use_cases.dart';
+import 'package:bibaw_app/features/app/domain/usecases/doctor_hospital_use_cases.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -37,12 +37,14 @@ void main() {
         hospitalID: tHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
+        roomNo: '123',
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(Params(
         doctorID: tDoctorID,
         hospitalID: tHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
+        roomNo: '123',
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.addDoctorHospitalRecord(
@@ -50,18 +52,35 @@ void main() {
         hospitalID: tHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
+        roomNo: '123',
       ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Edit doctorHospital record test
     test('should edit existing doctorHospital record in repository', () async {
-      when(mockIBibawRepository.editDoctorHospitalRecord(doctorID: tDoctorID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(doctorID: tDoctorID));
+      when(mockIBibawRepository.editDoctorHospitalRecord(
+        doctorID: tDoctorID,
+        hospitalID: tHospitalID,
+        consultationDaysHours: "M10-12/M14-16",
+        contactNo: '123456789',
+        roomNo: '123',
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        doctorID: tDoctorID,
+        hospitalID: tHospitalID,
+        consultationDaysHours: "M10-12/M14-16",
+        contactNo: '123456789',
+        roomNo: '123',
+      ));
       expect(result, Right(true));
-      verify(
-          mockIBibawRepository.editDoctorHospitalRecord(doctorID: tDoctorID));
+      verify(mockIBibawRepository.editDoctorHospitalRecord(
+        doctorID: tDoctorID,
+        hospitalID: tHospitalID,
+        consultationDaysHours: "M10-12/M14-16",
+        contactNo: '123456789',
+        roomNo: '123',
+      ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
@@ -83,6 +102,7 @@ void main() {
       hospitalID: tHospitalID,
       consultationDaysHours: "M10-12/M14-16",
       contactNo: '123456789',
+      roomNo: '123',
     );
     test('should retrieve doctorHospital record from repository', () async {
       when(mockIBibawRepository.retrieveDoctorHospitalRecord(
