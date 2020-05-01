@@ -24,16 +24,11 @@ void main() {
     usecaseRetrieve = RetrieveInfantRecord(repository: mockIBibawRepository);
   });
 
-  final tInfantID = kInfantID;
-  final tParentID = kParentID;
-  final tDoctorID = kDoctorID;
-  final tHospitalID = kHospitalID;
-
   group('infant record use cases', () {
     // add infant record test
     test('should add new infant record to repository', () async {
       when(mockIBibawRepository.addInfantRecord(
-        infantID: tInfantID,
+        infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
         middleInitial: 'G',
@@ -49,13 +44,13 @@ void main() {
         birthProblems: 'test problems',
         distinguishingMarks: 'test marks',
         deliveryType: 'CS',
-        parentID: tParentID,
-        obstetricianID: tDoctorID,
-        pediatricianID: tDoctorID,
-        hospitalID: tHospitalID,
+        parentID: kParentID,
+        obstetricianID: kDoctorID,
+        pediatricianID: kDoctorID,
+        hospitalID: kHospitalID,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(Params(
-        infantID: tInfantID,
+        infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
         middleInitial: 'G',
@@ -71,14 +66,14 @@ void main() {
         birthProblems: 'test problems',
         distinguishingMarks: 'test marks',
         deliveryType: 'CS',
-        parentID: tParentID,
-        obstetricianID: tDoctorID,
-        pediatricianID: tDoctorID,
-        hospitalID: tHospitalID,
+        parentID: kParentID,
+        obstetricianID: kDoctorID,
+        pediatricianID: kDoctorID,
+        hospitalID: kHospitalID,
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.addInfantRecord(
-        infantID: tInfantID,
+        infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
         middleInitial: 'G',
@@ -94,10 +89,10 @@ void main() {
         birthProblems: 'test problems',
         distinguishingMarks: 'test marks',
         deliveryType: 'CS',
-        parentID: tParentID,
-        obstetricianID: tDoctorID,
-        pediatricianID: tDoctorID,
-        hospitalID: tHospitalID,
+        parentID: kParentID,
+        obstetricianID: kDoctorID,
+        pediatricianID: kDoctorID,
+        hospitalID: kHospitalID,
       ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
@@ -105,7 +100,7 @@ void main() {
     // Edit infant record test
     test('should edit existing infant record in repository', () async {
       when(mockIBibawRepository.editInfantRecord(
-        infantID: tInfantID,
+        infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
         middleInitial: 'G',
@@ -121,13 +116,13 @@ void main() {
         birthProblems: 'test problems',
         distinguishingMarks: 'test marks',
         deliveryType: 'CS',
-        parentID: tParentID,
-        obstetricianID: tDoctorID,
-        pediatricianID: tDoctorID,
-        hospitalID: tHospitalID,
+        parentID: kParentID,
+        obstetricianID: kDoctorID,
+        pediatricianID: kDoctorID,
+        hospitalID: kHospitalID,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(
-        infantID: tInfantID,
+        infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
         middleInitial: 'G',
@@ -143,14 +138,14 @@ void main() {
         birthProblems: 'test problems',
         distinguishingMarks: 'test marks',
         deliveryType: 'CS',
-        parentID: tParentID,
-        obstetricianID: tDoctorID,
-        pediatricianID: tDoctorID,
-        hospitalID: tHospitalID,
+        parentID: kParentID,
+        obstetricianID: kDoctorID,
+        pediatricianID: kDoctorID,
+        hospitalID: kHospitalID,
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.editInfantRecord(
-        infantID: tInfantID,
+        infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
         middleInitial: 'G',
@@ -166,21 +161,21 @@ void main() {
         birthProblems: 'test problems',
         distinguishingMarks: 'test marks',
         deliveryType: 'CS',
-        parentID: tParentID,
-        obstetricianID: tDoctorID,
-        pediatricianID: tDoctorID,
-        hospitalID: tHospitalID,
+        parentID: kParentID,
+        obstetricianID: kDoctorID,
+        pediatricianID: kDoctorID,
+        hospitalID: kHospitalID,
       ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Delete infant record test
     test('should delete existing infant record in repository', () async {
-      when(mockIBibawRepository.deleteInfantRecord(infantID: tInfantID))
+      when(mockIBibawRepository.deleteInfantRecord(infantID: kInfantID))
           .thenAnswer((_) async => Right(true));
-      final result = await usecaseDelete(Params(infantID: tInfantID));
+      final result = await usecaseDelete(Params(infantID: kInfantID));
       expect(result, Right(true));
-      verify(mockIBibawRepository.deleteInfantRecord(infantID: tInfantID));
+      verify(mockIBibawRepository.deleteInfantRecord(infantID: kInfantID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
@@ -196,11 +191,11 @@ void main() {
         circumferenceHead: 33.1,
         parentID: kParentID);
     test('should retrieve infant record from repository', () async {
-      when(mockIBibawRepository.retrieveInfantRecord(infantID: tInfantID))
+      when(mockIBibawRepository.retrieveInfantRecord(infantID: kInfantID))
           .thenAnswer((_) async => Right(tInfant));
-      final result = await usecaseRetrieve(Params(infantID: tInfantID));
+      final result = await usecaseRetrieve(Params(infantID: kInfantID));
       expect(result, Right(tInfant));
-      verify(mockIBibawRepository.retrieveInfantRecord(infantID: tInfantID));
+      verify(mockIBibawRepository.retrieveInfantRecord(infantID: kInfantID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
   });

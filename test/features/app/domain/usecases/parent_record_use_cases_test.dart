@@ -24,8 +24,6 @@ void main() {
     usecaseRetrieve = RetrieveParentRecord(repository: mockIBibawRepository);
   });
 
-  final tParentID = kParentID;
-
   group('parent record use cases', () {
     // add parent record test
     test('should add new parent record to repository', () async {
@@ -35,7 +33,7 @@ void main() {
         gender: 'F',
         lastName: 'Parent',
         middleInitial: 'P',
-        parentID: tParentID,
+        parentID: kParentID,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(Params(
         birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
@@ -43,7 +41,7 @@ void main() {
         gender: 'F',
         lastName: 'Parent',
         middleInitial: 'P',
-        parentID: tParentID,
+        parentID: kParentID,
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.addParentRecord(
@@ -52,7 +50,7 @@ void main() {
         gender: 'F',
         lastName: 'Parent',
         middleInitial: 'P',
-        parentID: tParentID,
+        parentID: kParentID,
       ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
@@ -65,7 +63,7 @@ void main() {
         gender: 'F',
         lastName: 'Parent',
         middleInitial: 'P',
-        parentID: tParentID,
+        parentID: kParentID,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(
         birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
@@ -73,7 +71,7 @@ void main() {
         gender: 'F',
         lastName: 'Parent',
         middleInitial: 'P',
-        parentID: tParentID,
+        parentID: kParentID,
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.editParentRecord(
@@ -82,18 +80,18 @@ void main() {
         gender: 'F',
         lastName: 'Parent',
         middleInitial: 'P',
-        parentID: tParentID,
+        parentID: kParentID,
       ));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // Delete parent record test
     test('should delete existing parent record in repository', () async {
-      when(mockIBibawRepository.deleteParentRecord(parentID: tParentID))
+      when(mockIBibawRepository.deleteParentRecord(parentID: kParentID))
           .thenAnswer((_) async => Right(true));
-      final result = await usecaseDelete(Params(parentID: tParentID));
+      final result = await usecaseDelete(Params(parentID: kParentID));
       expect(result, Right(true));
-      verify(mockIBibawRepository.deleteParentRecord(parentID: tParentID));
+      verify(mockIBibawRepository.deleteParentRecord(parentID: kParentID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
@@ -104,14 +102,14 @@ void main() {
       gender: 'F',
       lastName: 'Parent',
       middleInitial: 'P',
-      parentID: tParentID,
+      parentID: kParentID,
     );
     test('should retrieve parent record from repository', () async {
-      when(mockIBibawRepository.retrieveParentRecord(parentID: tParentID))
+      when(mockIBibawRepository.retrieveParentRecord(parentID: kParentID))
           .thenAnswer((_) async => Right(tParent));
-      final result = await usecaseRetrieve(Params(parentID: tParentID));
+      final result = await usecaseRetrieve(Params(parentID: kParentID));
       expect(result, Right(tParent));
-      verify(mockIBibawRepository.retrieveParentRecord(parentID: tParentID));
+      verify(mockIBibawRepository.retrieveParentRecord(parentID: kParentID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
   });

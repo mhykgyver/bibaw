@@ -13,7 +13,7 @@ class AddHospitalRecord extends UseCase<bool, Params> {
   AddHospitalRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.addHospitalRecord(
       contactNo: params._contactNo,
       hospitalID: params._hospitalID,
@@ -29,7 +29,7 @@ class EditHospitalRecord extends UseCase<bool, Params> {
   EditHospitalRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.editHospitalRecord(
       contactNo: params._contactNo,
       hospitalID: params._hospitalID,
@@ -45,7 +45,7 @@ class DeleteHospitalRecord extends UseCase<bool, Params> {
   DeleteHospitalRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.deleteHospitalRecord(
         hospitalID: params._hospitalID);
   }
@@ -57,7 +57,7 @@ class RetrieveHospitalRecord extends UseCase<Hospital, Params> {
   RetrieveHospitalRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, Hospital>> call(Params params) async {
+  Future<Either<IFailure, Hospital>> call(Params params) async {
     return await _repository.retrieveHospitalRecord(
         hospitalID: params._hospitalID);
   }

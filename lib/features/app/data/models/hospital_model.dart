@@ -13,4 +13,22 @@ class HospitalModel extends Hospital {
           location: location,
           contactNo: contactNo,
         );
+
+  factory HospitalModel.fromJson(Map<String, dynamic> json) {
+    return HospitalModel(
+      contactNo: json['contactNo'],
+      hospitalID: json['hospitalID'],
+      location: json['location'],
+      name: json['name'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'contactNo': contactNo,
+      'hospitalID': hospitalID,
+      'location': location,
+      'name': name,
+    };
+  }
 }

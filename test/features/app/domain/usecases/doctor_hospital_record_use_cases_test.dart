@@ -26,30 +26,27 @@ void main() {
         RetrieveDoctorHospitalRecord(repository: mockIBibawRepository);
   });
 
-  final tDoctorID = kDoctorID;
-  final tHospitalID = kHospitalID;
-
   group('doctorHospital record use cases', () {
     // add doctorHospital record test
     test('should add new doctorHospital record to repository', () async {
       when(mockIBibawRepository.addDoctorHospitalRecord(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
         roomNo: '123',
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(Params(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
         roomNo: '123',
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.addDoctorHospitalRecord(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
         roomNo: '123',
@@ -60,23 +57,23 @@ void main() {
     // Edit doctorHospital record test
     test('should edit existing doctorHospital record in repository', () async {
       when(mockIBibawRepository.editDoctorHospitalRecord(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
         roomNo: '123',
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
         roomNo: '123',
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.editDoctorHospitalRecord(
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
         contactNo: '123456789',
         roomNo: '123',
@@ -87,31 +84,31 @@ void main() {
     // Delete doctorHospital record test
     test('should delete existing doctorHospital record in repository',
         () async {
-      when(mockIBibawRepository.deleteDoctorHospitalRecord(doctorID: tDoctorID))
+      when(mockIBibawRepository.deleteDoctorHospitalRecord(doctorID: kDoctorID))
           .thenAnswer((_) async => Right(true));
-      final result = await usecaseDelete(Params(doctorID: tDoctorID));
+      final result = await usecaseDelete(Params(doctorID: kDoctorID));
       expect(result, Right(true));
       verify(
-          mockIBibawRepository.deleteDoctorHospitalRecord(doctorID: tDoctorID));
+          mockIBibawRepository.deleteDoctorHospitalRecord(doctorID: kDoctorID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // retrieve doctorHospital record
     final tDoctorHospital = DoctorHospital(
       doctorID: kDoctorID,
-      hospitalID: tHospitalID,
+      hospitalID: kHospitalID,
       consultationDaysHours: "M10-12/M14-16",
       contactNo: '123456789',
       roomNo: '123',
     );
     test('should retrieve doctorHospital record from repository', () async {
       when(mockIBibawRepository.retrieveDoctorHospitalRecord(
-              doctorID: tDoctorID))
+              doctorID: kDoctorID))
           .thenAnswer((_) async => Right(tDoctorHospital));
-      final result = await usecaseRetrieve(Params(doctorID: tDoctorID));
+      final result = await usecaseRetrieve(Params(doctorID: kDoctorID));
       expect(result, Right(tDoctorHospital));
       verify(mockIBibawRepository.retrieveDoctorHospitalRecord(
-          doctorID: tDoctorID));
+          doctorID: kDoctorID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
   });

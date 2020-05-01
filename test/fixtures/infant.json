@@ -1,0 +1,22 @@
+{
+  "infantID": "24b2b16a-f88d-43ca-b499-1d0b6beb1f23",
+  "firstName": "Baby",
+  "lastName": "Girl",
+  "middleInitial": "G",
+  "gender": "F",
+  "birthDate": "2017-12-05 20:18:04Z",
+  "birthPlace": "Test Birth Place",
+  "weight": 33.0,
+  "height": 80.0,
+  "circumferenceHead": 20.0,
+  "circumferenceChest": 25.0,
+  "circumferenceAbdominal": 22.0,
+  "scoreAPGAR": "9,9",
+  "birthProblems": "test problems",
+  "distinguishingMarks": "test marks",
+  "deliveryType": "CS",
+  "parentID": "2b8a1af4-448d-42b9-9272-dfdea3b427e0",
+  "obstetricianID": "c44e7c65-5bab-419a-b43e-c325c93a5611",
+  "pediatricianID": "c44e7c65-5bab-419a-b43e-c325c93a5611",
+  "hospitalID": "24b2b16a-f88d-43ca-b499-1d0b6beb1f23"
+}

@@ -11,7 +11,7 @@ import '../entities/parent.dart';
 
 abstract class IBibawRepository {
   // Appointments
-  Future<Either<Failure, bool>> addAppointment({
+  Future<Either<IFailure, bool>> addAppointment({
     DateTime date,
     String appointmentID,
     String description,
@@ -19,7 +19,7 @@ abstract class IBibawRepository {
     String hospitalID,
     String infantID,
   });
-  Future<Either<Failure, bool>> editAppointment({
+  Future<Either<IFailure, bool>> editAppointment({
     DateTime date,
     String appointmentID,
     String description,
@@ -27,12 +27,12 @@ abstract class IBibawRepository {
     String hospitalID,
     String infantID,
   });
-  Future<Either<Failure, bool>> deleteAppointment({String appointmentID});
-  Future<Either<Failure, Appointment>> retrieveAppointment(
+  Future<Either<IFailure, bool>> deleteAppointment({String appointmentID});
+  Future<Either<IFailure, Appointment>> retrieveAppointment(
       {String appointmentID});
 
   // Checkups
-  Future<Either<Failure, bool>> addCheckup({
+  Future<Either<IFailure, bool>> addCheckup({
     String checkupID,
     DateTime date,
     double weight,
@@ -42,7 +42,7 @@ abstract class IBibawRepository {
     String medication,
     String instructions,
   });
-  Future<Either<Failure, bool>> editCheckup({
+  Future<Either<IFailure, bool>> editCheckup({
     String checkupID,
     DateTime date,
     double weight,
@@ -52,64 +52,65 @@ abstract class IBibawRepository {
     String medication,
     String instructions,
   });
-  Future<Either<Failure, bool>> deleteCheckup({String checkupID});
-  Future<Either<Failure, Checkup>> retrieveCheckup({String checkupID});
+  Future<Either<IFailure, bool>> deleteCheckup({String checkupID});
+  Future<Either<IFailure, Checkup>> retrieveCheckup({String checkupID});
 
   // Doctors
-  Future<Either<Failure, bool>> addDoctorRecord({
+  Future<Either<IFailure, bool>> addDoctorRecord({
     String doctorID,
     String firstName,
     String lastName,
     String middleInitial,
     String practice,
   });
-  Future<Either<Failure, bool>> editDoctorRecord({
+  Future<Either<IFailure, bool>> editDoctorRecord({
     String doctorID,
     String firstName,
     String lastName,
     String middleInitial,
     String practice,
   });
-  Future<Either<Failure, bool>> deleteDoctorRecord({String doctorID});
-  Future<Either<Failure, Doctor>> retrieveDoctorRecord({String doctorID});
+  Future<Either<IFailure, bool>> deleteDoctorRecord({String doctorID});
+  Future<Either<IFailure, Doctor>> retrieveDoctorRecord({String doctorID});
 
   // Doctor Hospitals
-  Future<Either<Failure, bool>> addDoctorHospitalRecord({
+  Future<Either<IFailure, bool>> addDoctorHospitalRecord({
     String doctorID,
     String hospitalID,
     String consultationDaysHours,
     String contactNo,
     String roomNo,
   });
-  Future<Either<Failure, bool>> editDoctorHospitalRecord({
+  Future<Either<IFailure, bool>> editDoctorHospitalRecord({
     String doctorID,
     String hospitalID,
     String consultationDaysHours,
     String contactNo,
     String roomNo,
   });
-  Future<Either<Failure, bool>> deleteDoctorHospitalRecord({String doctorID});
-  Future<Either<Failure, DoctorHospital>> retrieveDoctorHospitalRecord(
+  Future<Either<IFailure, bool>> deleteDoctorHospitalRecord({String doctorID});
+  Future<Either<IFailure, DoctorHospital>> retrieveDoctorHospitalRecord(
       {String doctorID});
 
   // Hospitals
-  Future<Either<Failure, bool>> addHospitalRecord({
+  Future<Either<IFailure, bool>> addHospitalRecord({
     String hospitalID,
     String name,
     String location,
     String contactNo,
   });
-  Future<Either<Failure, bool>> editHospitalRecord({
+  Future<Either<IFailure, bool>> editHospitalRecord({
     String hospitalID,
     String name,
     String location,
     String contactNo,
   });
-  Future<Either<Failure, bool>> deleteHospitalRecord({String hospitalID});
-  Future<Either<Failure, Hospital>> retrieveHospitalRecord({String hospitalID});
+  Future<Either<IFailure, bool>> deleteHospitalRecord({String hospitalID});
+  Future<Either<IFailure, Hospital>> retrieveHospitalRecord(
+      {String hospitalID});
 
   // Infants
-  Future<Either<Failure, bool>> addInfantRecord({
+  Future<Either<IFailure, bool>> addInfantRecord({
     String infantID,
     String firstName,
     String lastName,
@@ -131,7 +132,7 @@ abstract class IBibawRepository {
     String pediatricianID,
     String hospitalID,
   });
-  Future<Either<Failure, bool>> editInfantRecord({
+  Future<Either<IFailure, bool>> editInfantRecord({
     String infantID,
     String firstName,
     String lastName,
@@ -153,11 +154,11 @@ abstract class IBibawRepository {
     String pediatricianID,
     String hospitalID,
   });
-  Future<Either<Failure, bool>> deleteInfantRecord({String infantID});
-  Future<Either<Failure, Infant>> retrieveInfantRecord({String infantID});
+  Future<Either<IFailure, bool>> deleteInfantRecord({String infantID});
+  Future<Either<IFailure, Infant>> retrieveInfantRecord({String infantID});
 
   // Parents
-  Future<Either<Failure, bool>> addParentRecord({
+  Future<Either<IFailure, bool>> addParentRecord({
     DateTime birthDate,
     String firstName,
     String gender,
@@ -165,7 +166,7 @@ abstract class IBibawRepository {
     String middleInitial,
     String parentID,
   });
-  Future<Either<Failure, bool>> editParentRecord({
+  Future<Either<IFailure, bool>> editParentRecord({
     DateTime birthDate,
     String firstName,
     String gender,
@@ -173,6 +174,6 @@ abstract class IBibawRepository {
     String middleInitial,
     String parentID,
   });
-  Future<Either<Failure, bool>> deleteParentRecord({String parentID});
-  Future<Either<Failure, Parent>> retrieveParentRecord({String parentID});
+  Future<Either<IFailure, bool>> deleteParentRecord({String parentID});
+  Future<Either<IFailure, Parent>> retrieveParentRecord({String parentID});
 }

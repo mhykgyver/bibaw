@@ -24,15 +24,23 @@ void main() {
     usecaseRetrieve = RetrieveCheckup(repository: mockIBibawRepository);
   });
 
-  final tCheckupID = kCheckupID;
-
   group('checkup use cases', () {
+    final tCheckup = Checkup(
+      checkupID: kCheckupID,
+      height: 70.0,
+      weight: 20.0,
+      date: DateTime.now(),
+      circumferenceHead: 33.1,
+      medication: 'medication notice',
+      problems: 'problems test',
+      instructions: 'instructions test',
+    );
     // add checkup test
     test('should add new checkup to repository', () async {
       when(mockIBibawRepository.addCheckup(
-        checkupID: tCheckupID,
+        checkupID: kCheckupID,
         circumferenceHead: 33.0,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         height: 80.0,
         instructions: 'test instructions',
         medication: 'test medications',
@@ -40,9 +48,9 @@ void main() {
         weight: 30.0,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseAdd(Params(
-        checkupID: tCheckupID,
+        checkupID: kCheckupID,
         circumferenceHead: 33.0,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         height: 80.0,
         instructions: 'test instructions',
         medication: 'test medications',
@@ -51,9 +59,9 @@ void main() {
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.addCheckup(
-        checkupID: tCheckupID,
+        checkupID: kCheckupID,
         circumferenceHead: 33.0,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         height: 80.0,
         instructions: 'test instructions',
         medication: 'test medications',
@@ -66,9 +74,9 @@ void main() {
     // Edit checkup test
     test('should edit existing checkup in repository', () async {
       when(mockIBibawRepository.editCheckup(
-        checkupID: tCheckupID,
+        checkupID: kCheckupID,
         circumferenceHead: 33.0,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         height: 80.0,
         instructions: 'test instructions',
         medication: 'test medications',
@@ -76,9 +84,9 @@ void main() {
         weight: 30.0,
       )).thenAnswer((_) async => Right(true));
       final result = await usecaseEdit(Params(
-        checkupID: tCheckupID,
+        checkupID: kCheckupID,
         circumferenceHead: 33.0,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         height: 80.0,
         instructions: 'test instructions',
         medication: 'test medications',
@@ -87,9 +95,9 @@ void main() {
       ));
       expect(result, Right(true));
       verify(mockIBibawRepository.editCheckup(
-        checkupID: tCheckupID,
+        checkupID: kCheckupID,
         circumferenceHead: 33.0,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         height: 80.0,
         instructions: 'test instructions',
         medication: 'test medications',
@@ -101,31 +109,21 @@ void main() {
 
     // Delete checkup test
     test('should delete existing checkup in repository', () async {
-      when(mockIBibawRepository.deleteCheckup(checkupID: tCheckupID))
+      when(mockIBibawRepository.deleteCheckup(checkupID: kCheckupID))
           .thenAnswer((_) async => Right(true));
-      final result = await usecaseDelete(Params(checkupID: tCheckupID));
+      final result = await usecaseDelete(Params(checkupID: kCheckupID));
       expect(result, Right(true));
-      verify(mockIBibawRepository.deleteCheckup(checkupID: tCheckupID));
+      verify(mockIBibawRepository.deleteCheckup(checkupID: kCheckupID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
 
     // retrieve checkup
-    final tCheckup = Checkup(
-      checkupID: kCheckupID,
-      height: 70.0,
-      weight: 20.0,
-      date: DateTime.now(),
-      circumferenceHead: 33.1,
-      medication: 'medication notice',
-      problems: 'problems test',
-      instructions: 'instructions test',
-    );
     test('should retrieve checkup from repository', () async {
-      when(mockIBibawRepository.retrieveCheckup(checkupID: tCheckupID))
+      when(mockIBibawRepository.retrieveCheckup(checkupID: kCheckupID))
           .thenAnswer((_) async => Right(tCheckup));
-      final result = await usecaseRetrieve(Params(checkupID: tCheckupID));
+      final result = await usecaseRetrieve(Params(checkupID: kCheckupID));
       expect(result, Right(tCheckup));
-      verify(mockIBibawRepository.retrieveCheckup(checkupID: tCheckupID));
+      verify(mockIBibawRepository.retrieveCheckup(checkupID: kCheckupID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
   });

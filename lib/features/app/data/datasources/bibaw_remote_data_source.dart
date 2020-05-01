@@ -1,18 +1,16 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
-import '../../domain/entities/appointment.dart';
-import '../../domain/entities/checkup.dart';
-import '../../domain/entities/doctor.dart';
-import '../../domain/entities/doctor_hospital.dart';
-import '../../domain/entities/hospital.dart';
-import '../../domain/entities/infant.dart';
-import '../../domain/entities/parent.dart';
-import '../../domain/repositories/bibaw_repository_domain_layer.dart';
+import '../models/appointment_model.dart';
+import '../models/checkup_model.dart';
+import '../models/doctor_hospital_model.dart';
+import '../models/doctor_model.dart';
+import '../models/hospital_model.dart';
+import '../models/infant_model.dart';
+import '../models/parent_model.dart';
 
-class BibawRepository implements IBibawRepository {
-  @override
-  Future<Either<IFailure, bool>> addAppointment(
+abstract class IBibawRemoteDataSource {
+  Future<AppointmentModel> addAppointment(
       {DateTime date,
       String appointmentID,
       String description,
@@ -23,8 +21,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> addCheckup(
+  Future<CheckupModel> addCheckup(
       {String checkupID,
       DateTime date,
       double weight,
@@ -37,8 +34,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> addDoctorHospitalRecord(
+  Future<DoctorHospitalModel> addDoctorHospitalRecord(
       {String doctorID,
       String hospitalID,
       String consultationDaysHours,
@@ -48,8 +44,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> addDoctorRecord(
+  Future<DoctorModel> addDoctorRecord(
       {String doctorID,
       String firstName,
       String lastName,
@@ -59,15 +54,13 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> addHospitalRecord(
+  Future<HospitalModel> addHospitalRecord(
       {String hospitalID, String name, String location, String contactNo}) {
     // TODO: implement addHospitalRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> addInfantRecord(
+  Future<InfantModel> addInfantRecord(
       {String infantID,
       String firstName,
       String lastName,
@@ -92,8 +85,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> addParentRecord(
+  Future<ParentModel> addParentRecord(
       {DateTime birthDate,
       String firstName,
       String gender,
@@ -104,50 +96,42 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteAppointment({String appointmentID}) {
+  Future<AppointmentModel> deleteAppointment({String appointmentID}) {
     // TODO: implement deleteAppointment
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteCheckup({String checkupID}) {
+  Future<CheckupModel> deleteCheckup({String checkupID}) {
     // TODO: implement deleteCheckup
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteDoctorHospitalRecord({String doctorID}) {
+  Future<DoctorHospitalModel> deleteDoctorHospitalRecord({String doctorID}) {
     // TODO: implement deleteDoctorHospitalRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteDoctorRecord({String doctorID}) {
+  Future<DoctorModel> deleteDoctorRecord({String doctorID}) {
     // TODO: implement deleteDoctorRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteHospitalRecord({String hospitalID}) {
+  Future<HospitalModel> deleteHospitalRecord({String hospitalID}) {
     // TODO: implement deleteHospitalRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteInfantRecord({String infantID}) {
+  Future<InfantModel> deleteInfantRecord({String infantID}) {
     // TODO: implement deleteInfantRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> deleteParentRecord({String parentID}) {
+  Future<ParentModel> deleteParentRecord({String parentID}) {
     // TODO: implement deleteParentRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editAppointment(
+  Future<AppointmentModel> editAppointment(
       {DateTime date,
       String appointmentID,
       String description,
@@ -158,8 +142,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editCheckup(
+  Future<CheckupModel> editCheckup(
       {String checkupID,
       DateTime date,
       double weight,
@@ -172,8 +155,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editDoctorHospitalRecord(
+  Future<DoctorHospitalModel> editDoctorHospitalRecord(
       {String doctorID,
       String hospitalID,
       String consultationDaysHours,
@@ -183,8 +165,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editDoctorRecord(
+  Future<DoctorModel> editDoctorRecord(
       {String doctorID,
       String firstName,
       String lastName,
@@ -194,15 +175,13 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editHospitalRecord(
+  Future<HospitalModel> editHospitalRecord(
       {String hospitalID, String name, String location, String contactNo}) {
     // TODO: implement editHospitalRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editInfantRecord(
+  Future<InfantModel> editInfantRecord(
       {String infantID,
       String firstName,
       String lastName,
@@ -227,8 +206,7 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, bool>> editParentRecord(
+  Future<ParentModel> editParentRecord(
       {DateTime birthDate,
       String firstName,
       String gender,
@@ -239,47 +217,37 @@ class BibawRepository implements IBibawRepository {
     return null;
   }
 
-  @override
-  Future<Either<IFailure, Appointment>> retrieveAppointment(
-      {String appointmentID}) {
+  Future<AppointmentModel> retrieveAppointment({String appointmentID}) {
     // TODO: implement retrieveAppointment
     return null;
   }
 
-  @override
-  Future<Either<IFailure, Checkup>> retrieveCheckup({String checkupID}) {
+  Future<CheckupModel> retrieveCheckup({String checkupID}) {
     // TODO: implement retrieveCheckup
     return null;
   }
 
-  @override
-  Future<Either<IFailure, DoctorHospital>> retrieveDoctorHospitalRecord(
-      {String doctorID}) {
+  Future<DoctorHospitalModel> retrieveDoctorHospitalRecord({String doctorID}) {
     // TODO: implement retrieveDoctorHospitalRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, Doctor>> retrieveDoctorRecord({String doctorID}) {
+  Future<DoctorModel> retrieveDoctorRecord({String doctorID}) {
     // TODO: implement retrieveDoctorRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, Hospital>> retrieveHospitalRecord(
-      {String hospitalID}) {
+  Future<HospitalModel> retrieveHospitalRecord({String hospitalID}) {
     // TODO: implement retrieveHospitalRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, Infant>> retrieveInfantRecord({String infantID}) {
+  Future<InfantModel> retrieveInfantRecord({String infantID}) {
     // TODO: implement retrieveInfantRecord
     return null;
   }
 
-  @override
-  Future<Either<IFailure, Parent>> retrieveParentRecord({String parentID}) {
+  Future<ParentModel> retrieveParentRecord({String parentID}) {
     // TODO: implement retrieveParentRecord
     return null;
   }

@@ -13,7 +13,7 @@ class AddParentRecord extends UseCase<bool, Params> {
   AddParentRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.addParentRecord(
       birthDate: params._birthDate,
       firstName: params._firstName,
@@ -31,7 +31,7 @@ class EditParentRecord extends UseCase<bool, Params> {
   EditParentRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.editParentRecord(
       birthDate: params._birthDate,
       firstName: params._firstName,
@@ -49,7 +49,7 @@ class DeleteParentRecord extends UseCase<bool, Params> {
   DeleteParentRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.deleteParentRecord(parentID: params._parentID);
   }
 }
@@ -60,7 +60,7 @@ class RetrieveParentRecord extends UseCase<Parent, Params> {
   RetrieveParentRecord({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, Parent>> call(Params params) async {
+  Future<Either<IFailure, Parent>> call(Params params) async {
     return await _repository.retrieveParentRecord(parentID: params._parentID);
   }
 }

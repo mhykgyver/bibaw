@@ -2,34 +2,29 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
 class Appointment extends Equatable {
-  final DateTime _date;
-  final String _appointmentID;
-  final String _description;
-  final String _doctorID;
-  final String _hospitalID;
-  final String _infantID;
+  final DateTime date;
+  final String appointmentID;
+  final String description;
+  final String doctorID;
+  final String hospitalID;
+  final String infantID;
 
   const Appointment({
-    @required appointmentID,
-    @required date,
-    description,
-    @required doctorID,
-    @required hospitalID,
-    @required infantID,
-  })  : _appointmentID = appointmentID,
-        _date = date,
-        _description = description,
-        _doctorID = doctorID,
-        _hospitalID = hospitalID,
-        _infantID = infantID;
+    @required this.appointmentID,
+    @required this.date,
+    this.description,
+    @required this.doctorID,
+    @required this.hospitalID,
+    @required this.infantID,
+  });
 
   @override
   List<Object> get props => [
-        _appointmentID,
-        _date,
-        _description,
-        _doctorID,
-        _hospitalID,
-        _infantID,
+        appointmentID,
+        date,
+        description,
+        doctorID,
+        hospitalID,
+        infantID,
       ];
 }

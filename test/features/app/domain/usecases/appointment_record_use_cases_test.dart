@@ -24,85 +24,9 @@ void main() {
     usecaseRetrieve = RetrieveAppointment(repository: mockIBibawRepository);
   });
 
-  final tAppointmentID = kAppointmentID;
-  final tInfantID = kInfantID;
-  final tDoctorID = kDoctorID;
-  final tHospitalID = kHospitalID;
-
+// TODO: clean all tests, remove unneeded variables
+// TODO: convert all class variables to private
   group('appointment record use cases', () {
-    // add appointment record test
-    test('should add new appointment record to repository', () async {
-      when(mockIBibawRepository.addAppointment(
-        appointmentID: kAppointmentID,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
-        description: "test description",
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
-      )).thenAnswer((_) async => Right(true));
-      final result = await usecaseAdd(Params(
-        appointmentID: kAppointmentID,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
-        description: "test description",
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
-      ));
-      expect(result, Right(true));
-      verify(mockIBibawRepository.addAppointment(
-        appointmentID: kAppointmentID,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
-        description: "test description",
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
-      ));
-      verifyNoMoreInteractions(mockIBibawRepository);
-    });
-
-    // Edit appointment record test
-    test('should edit existing appointment record in repository', () async {
-      when(mockIBibawRepository.editAppointment(
-        appointmentID: kAppointmentID,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
-        description: "test description",
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
-      )).thenAnswer((_) async => Right(true));
-      final result = await usecaseEdit(Params(
-        appointmentID: kAppointmentID,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
-        description: "test description",
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
-      ));
-      expect(result, Right(true));
-      verify(mockIBibawRepository.editAppointment(
-        appointmentID: kAppointmentID,
-        date: DateTime.parse("2020-12-05 20:18:04Z"),
-        description: "test description",
-        doctorID: tDoctorID,
-        hospitalID: tHospitalID,
-        infantID: tInfantID,
-      ));
-      verifyNoMoreInteractions(mockIBibawRepository);
-    });
-
-    // Delete appointment record test
-    test('should delete existing appointment record in repository', () async {
-      when(mockIBibawRepository.deleteAppointment(
-              appointmentID: tAppointmentID))
-          .thenAnswer((_) async => Right(true));
-      final result = await usecaseDelete(Params(appointmentID: tAppointmentID));
-      expect(result, Right(true));
-      verify(mockIBibawRepository.deleteAppointment(
-          appointmentID: tAppointmentID));
-      verifyNoMoreInteractions(mockIBibawRepository);
-    });
-
-    // retrieve appointment record
     final tAppointment = Appointment(
       appointmentID: kAppointmentID,
       date: DateTime.now(),
@@ -111,15 +35,89 @@ void main() {
       hospitalID: kHospitalID,
       infantID: kInfantID,
     );
+    // add appointment record test
+    test('should add new appointment record to repository', () async {
+      when(mockIBibawRepository.addAppointment(
+        appointmentID: kAppointmentID,
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
+        description: "test description",
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
+        infantID: kInfantID,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseAdd(Params(
+        appointmentID: kAppointmentID,
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
+        description: "test description",
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
+        infantID: kInfantID,
+      ));
+      expect(result, Right(true));
+      verify(mockIBibawRepository.addAppointment(
+        appointmentID: kAppointmentID,
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
+        description: "test description",
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
+        infantID: kInfantID,
+      ));
+      verifyNoMoreInteractions(mockIBibawRepository);
+    });
+
+    // Edit appointment record test
+    test('should edit existing appointment record in repository', () async {
+      when(mockIBibawRepository.editAppointment(
+        appointmentID: kAppointmentID,
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
+        description: "test description",
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
+        infantID: kInfantID,
+      )).thenAnswer((_) async => Right(true));
+      final result = await usecaseEdit(Params(
+        appointmentID: kAppointmentID,
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
+        description: "test description",
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
+        infantID: kInfantID,
+      ));
+      expect(result, Right(true));
+      verify(mockIBibawRepository.editAppointment(
+        appointmentID: kAppointmentID,
+        date: DateTime.parse("2020-12-05 20:18:04.000Z"),
+        description: "test description",
+        doctorID: kDoctorID,
+        hospitalID: kHospitalID,
+        infantID: kInfantID,
+      ));
+      verifyNoMoreInteractions(mockIBibawRepository);
+    });
+
+    // Delete appointment record test
+    test('should delete existing appointment record in repository', () async {
+      when(mockIBibawRepository.deleteAppointment(
+              appointmentID: kAppointmentID))
+          .thenAnswer((_) async => Right(true));
+      final result = await usecaseDelete(Params(appointmentID: kAppointmentID));
+      expect(result, Right(true));
+      verify(mockIBibawRepository.deleteAppointment(
+          appointmentID: kAppointmentID));
+      verifyNoMoreInteractions(mockIBibawRepository);
+    });
+
+    // retrieve appointment record
+
     test('should retrieve appointment record from repository', () async {
       when(mockIBibawRepository.retrieveAppointment(
-              appointmentID: tAppointmentID))
+              appointmentID: kAppointmentID))
           .thenAnswer((_) async => Right(tAppointment));
       final result =
-          await usecaseRetrieve(Params(appointmentID: tAppointmentID));
+          await usecaseRetrieve(Params(appointmentID: kAppointmentID));
       expect(result, Right(tAppointment));
       verify(mockIBibawRepository.retrieveAppointment(
-          appointmentID: tAppointmentID));
+          appointmentID: kAppointmentID));
       verifyNoMoreInteractions(mockIBibawRepository);
     });
   });

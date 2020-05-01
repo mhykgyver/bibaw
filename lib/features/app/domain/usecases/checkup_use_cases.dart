@@ -12,7 +12,7 @@ class AddCheckup extends UseCase<bool, Params> {
   AddCheckup({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.addCheckup(
       checkupID: params._checkupID,
       circumferenceHead: params._circumferenceHead,
@@ -32,7 +32,7 @@ class EditCheckup extends UseCase<bool, Params> {
   EditCheckup({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.editCheckup(
       checkupID: params._checkupID,
       circumferenceHead: params._circumferenceHead,
@@ -52,7 +52,7 @@ class DeleteCheckup extends UseCase<bool, Params> {
   DeleteCheckup({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.deleteCheckup(checkupID: params._checkupID);
   }
 }
@@ -63,7 +63,7 @@ class RetrieveCheckup extends UseCase<Checkup, Params> {
   RetrieveCheckup({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, Checkup>> call(Params params) async {
+  Future<Either<IFailure, Checkup>> call(Params params) async {
     return await _repository.retrieveCheckup(checkupID: params._checkupID);
   }
 }

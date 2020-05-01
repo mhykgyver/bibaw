@@ -12,7 +12,7 @@ class AddAppointment extends UseCase<bool, Params> {
   AddAppointment({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.addAppointment(
       appointmentID: params._appointmentID,
       date: params._date,
@@ -30,7 +30,7 @@ class EditAppointment extends UseCase<bool, Params> {
   EditAppointment({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.editAppointment(
       appointmentID: params._appointmentID,
       date: params._date,
@@ -48,7 +48,7 @@ class DeleteAppointment extends UseCase<bool, Params> {
   DeleteAppointment({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<IFailure, bool>> call(Params params) async {
     return await _repository.deleteAppointment(
         appointmentID: params._appointmentID);
   }
@@ -60,7 +60,7 @@ class RetrieveAppointment extends UseCase<Appointment, Params> {
   RetrieveAppointment({repository}) : _repository = repository;
 
   @override
-  Future<Either<Failure, Appointment>> call(Params params) async {
+  Future<Either<IFailure, Appointment>> call(Params params) async {
     return await _repository.retrieveAppointment(
         appointmentID: params._appointmentID);
   }

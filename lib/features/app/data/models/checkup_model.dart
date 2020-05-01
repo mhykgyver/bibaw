@@ -21,4 +21,29 @@ class CheckupModel extends Checkup {
           problems: problems,
           weight: weight,
         );
+  factory CheckupModel.fromJson(Map<String, dynamic> json) {
+    return CheckupModel(
+      checkupID: json['checkupID'],
+      date: DateTime.parse(json['date']),
+      circumferenceHead: json['circumferenceHead'],
+      height: json['height'],
+      instructions: json['instructions'],
+      medication: json['medication'],
+      problems: json['problems'],
+      weight: json['weight'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'checkupID': checkupID,
+      'date': date.toString(),
+      'circumferenceHead': circumferenceHead,
+      'height': height,
+      'instructions': instructions,
+      'medication': medication,
+      'problems': problems,
+      'weight': weight,
+    };
+  }
 }

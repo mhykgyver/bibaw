@@ -15,4 +15,23 @@ class DoctorHospitalModel extends DoctorHospital {
           contactNo: contactNo,
           roomNo: roomNo,
         );
+  factory DoctorHospitalModel.fromJson(Map<String, dynamic> json) {
+    return DoctorHospitalModel(
+      doctorID: json['doctorID'],
+      hospitalID: json['hospitalID'],
+      consultationDaysHours: json['consultationDaysHours'],
+      contactNo: json['contactNo'],
+      roomNo: json['roomNo'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'doctorID': doctorID,
+      'hospitalID': hospitalID,
+      'consultationDaysHours': consultationDaysHours,
+      'contactNo': contactNo,
+      'roomNo': roomNo,
+    };
+  }
 }
