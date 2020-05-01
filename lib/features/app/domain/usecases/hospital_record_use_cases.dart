@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/use_case.dart';
 import '../entities/hospital.dart';
-import '../repositories/bibaw_repository_domain_layer.dart';
+import '../repositories/bibaw_repository.dart';
 
-class AddHospitalRecord extends UseCase<bool, Params> {
+class AddHospitalRecord extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   AddHospitalRecord({repository}) : _repository = repository;
@@ -23,7 +23,7 @@ class AddHospitalRecord extends UseCase<bool, Params> {
   }
 }
 
-class EditHospitalRecord extends UseCase<bool, Params> {
+class EditHospitalRecord extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   EditHospitalRecord({repository}) : _repository = repository;
@@ -39,7 +39,7 @@ class EditHospitalRecord extends UseCase<bool, Params> {
   }
 }
 
-class DeleteHospitalRecord extends UseCase<bool, Params> {
+class DeleteHospitalRecord extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   DeleteHospitalRecord({repository}) : _repository = repository;
@@ -51,7 +51,7 @@ class DeleteHospitalRecord extends UseCase<bool, Params> {
   }
 }
 
-class RetrieveHospitalRecord extends UseCase<Hospital, Params> {
+class RetrieveHospitalRecord extends IUseCase<Hospital, Params> {
   final IBibawRepository _repository;
 
   RetrieveHospitalRecord({repository}) : _repository = repository;

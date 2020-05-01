@@ -1,5 +1,5 @@
 import 'package:bibaw_app/features/app/domain/entities/doctor_hospital.dart';
-import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository_domain_layer.dart';
+import 'package:bibaw_app/features/app/domain/repositories/bibaw_repository.dart';
 import 'package:bibaw_app/features/app/domain/usecases/doctor_hospital_use_cases.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';

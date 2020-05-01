@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 import '../error/failures.dart';
 
-abstract class UseCase<Type, Params> {
+abstract class IUseCase<Type, Params> {
   Future<Either<IFailure, Type>> call(Params params);
 }
 

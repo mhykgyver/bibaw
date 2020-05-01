@@ -5,9 +5,9 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/use_case.dart';
 import '../entities/parent.dart';
-import '../repositories/bibaw_repository_domain_layer.dart';
+import '../repositories/bibaw_repository.dart';
 
-class AddParentRecord extends UseCase<bool, Params> {
+class AddParentRecord extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   AddParentRecord({repository}) : _repository = repository;
@@ -25,7 +25,7 @@ class AddParentRecord extends UseCase<bool, Params> {
   }
 }
 
-class EditParentRecord extends UseCase<bool, Params> {
+class EditParentRecord extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   EditParentRecord({repository}) : _repository = repository;
@@ -43,7 +43,7 @@ class EditParentRecord extends UseCase<bool, Params> {
   }
 }
 
-class DeleteParentRecord extends UseCase<bool, Params> {
+class DeleteParentRecord extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   DeleteParentRecord({repository}) : _repository = repository;
@@ -54,7 +54,7 @@ class DeleteParentRecord extends UseCase<bool, Params> {
   }
 }
 
-class RetrieveParentRecord extends UseCase<Parent, Params> {
+class RetrieveParentRecord extends IUseCase<Parent, Params> {
   final IBibawRepository _repository;
 
   RetrieveParentRecord({repository}) : _repository = repository;

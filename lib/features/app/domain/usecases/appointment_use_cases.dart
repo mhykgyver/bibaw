@@ -4,9 +4,9 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/use_case.dart';
 import '../entities/appointment.dart';
-import '../repositories/bibaw_repository_domain_layer.dart';
+import '../repositories/bibaw_repository.dart';
 
-class AddAppointment extends UseCase<bool, Params> {
+class AddAppointment extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   AddAppointment({repository}) : _repository = repository;
@@ -24,7 +24,7 @@ class AddAppointment extends UseCase<bool, Params> {
   }
 }
 
-class EditAppointment extends UseCase<bool, Params> {
+class EditAppointment extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   EditAppointment({repository}) : _repository = repository;
@@ -42,7 +42,7 @@ class EditAppointment extends UseCase<bool, Params> {
   }
 }
 
-class DeleteAppointment extends UseCase<bool, Params> {
+class DeleteAppointment extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   DeleteAppointment({repository}) : _repository = repository;
@@ -54,7 +54,7 @@ class DeleteAppointment extends UseCase<bool, Params> {
   }
 }
 
-class RetrieveAppointment extends UseCase<Appointment, Params> {
+class RetrieveAppointment extends IUseCase<Appointment, Params> {
   final IBibawRepository _repository;
 
   RetrieveAppointment({repository}) : _repository = repository;

@@ -4,9 +4,9 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/use_case.dart';
 import '../entities/checkup.dart';
-import '../repositories/bibaw_repository_domain_layer.dart';
+import '../repositories/bibaw_repository.dart';
 
-class AddCheckup extends UseCase<bool, Params> {
+class AddCheckup extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   AddCheckup({repository}) : _repository = repository;
@@ -26,7 +26,7 @@ class AddCheckup extends UseCase<bool, Params> {
   }
 }
 
-class EditCheckup extends UseCase<bool, Params> {
+class EditCheckup extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   EditCheckup({repository}) : _repository = repository;
@@ -46,7 +46,7 @@ class EditCheckup extends UseCase<bool, Params> {
   }
 }
 
-class DeleteCheckup extends UseCase<bool, Params> {
+class DeleteCheckup extends IUseCase<bool, Params> {
   final IBibawRepository _repository;
 
   DeleteCheckup({repository}) : _repository = repository;
@@ -57,7 +57,7 @@ class DeleteCheckup extends UseCase<bool, Params> {
   }
 }
 
-class RetrieveCheckup extends UseCase<Checkup, Params> {
+class RetrieveCheckup extends IUseCase<Checkup, Params> {
   final IBibawRepository _repository;
 
   RetrieveCheckup({repository}) : _repository = repository;

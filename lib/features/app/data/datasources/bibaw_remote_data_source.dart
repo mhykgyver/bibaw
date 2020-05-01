@@ -1,6 +1,3 @@
-import 'package:dartz/dartz.dart';
-
-import '../../../../core/error/failures.dart';
 import '../models/appointment_model.dart';
 import '../models/checkup_model.dart';
 import '../models/doctor_hospital_model.dart';
@@ -10,7 +7,7 @@ import '../models/infant_model.dart';
 import '../models/parent_model.dart';
 
 abstract class IBibawRemoteDataSource {
-  Future<AppointmentModel> addAppointment(
+  Future<bool> addAppointment(
       {DateTime date,
       String appointmentID,
       String description,
@@ -21,7 +18,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<CheckupModel> addCheckup(
+  Future<bool> addCheckup(
       {String checkupID,
       DateTime date,
       double weight,
@@ -34,7 +31,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<DoctorHospitalModel> addDoctorHospitalRecord(
+  Future<bool> addDoctorHospitalRecord(
       {String doctorID,
       String hospitalID,
       String consultationDaysHours,
@@ -44,7 +41,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<DoctorModel> addDoctorRecord(
+  Future<bool> addDoctorRecord(
       {String doctorID,
       String firstName,
       String lastName,
@@ -54,13 +51,13 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<HospitalModel> addHospitalRecord(
+  Future<bool> addHospitalRecord(
       {String hospitalID, String name, String location, String contactNo}) {
     // TODO: implement addHospitalRecord
     return null;
   }
 
-  Future<InfantModel> addInfantRecord(
+  Future<bool> addInfantRecord(
       {String infantID,
       String firstName,
       String lastName,
@@ -85,7 +82,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<ParentModel> addParentRecord(
+  Future<bool> addParentRecord(
       {DateTime birthDate,
       String firstName,
       String gender,
@@ -96,42 +93,42 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<AppointmentModel> deleteAppointment({String appointmentID}) {
+  Future<bool> deleteAppointment({String appointmentID}) {
     // TODO: implement deleteAppointment
     return null;
   }
 
-  Future<CheckupModel> deleteCheckup({String checkupID}) {
+  Future<bool> deleteCheckup({String checkupID}) {
     // TODO: implement deleteCheckup
     return null;
   }
 
-  Future<DoctorHospitalModel> deleteDoctorHospitalRecord({String doctorID}) {
+  Future<bool> deleteDoctorHospitalRecord({String doctorID}) {
     // TODO: implement deleteDoctorHospitalRecord
     return null;
   }
 
-  Future<DoctorModel> deleteDoctorRecord({String doctorID}) {
+  Future<bool> deleteDoctorRecord({String doctorID}) {
     // TODO: implement deleteDoctorRecord
     return null;
   }
 
-  Future<HospitalModel> deleteHospitalRecord({String hospitalID}) {
+  Future<bool> deleteHospitalRecord({String hospitalID}) {
     // TODO: implement deleteHospitalRecord
     return null;
   }
 
-  Future<InfantModel> deleteInfantRecord({String infantID}) {
+  Future<bool> deleteInfantRecord({String infantID}) {
     // TODO: implement deleteInfantRecord
     return null;
   }
 
-  Future<ParentModel> deleteParentRecord({String parentID}) {
+  Future<bool> deleteParentRecord({String parentID}) {
     // TODO: implement deleteParentRecord
     return null;
   }
 
-  Future<AppointmentModel> editAppointment(
+  Future<bool> editAppointment(
       {DateTime date,
       String appointmentID,
       String description,
@@ -142,7 +139,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<CheckupModel> editCheckup(
+  Future<bool> editCheckup(
       {String checkupID,
       DateTime date,
       double weight,
@@ -155,7 +152,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<DoctorHospitalModel> editDoctorHospitalRecord(
+  Future<bool> editDoctorHospitalRecord(
       {String doctorID,
       String hospitalID,
       String consultationDaysHours,
@@ -165,7 +162,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<DoctorModel> editDoctorRecord(
+  Future<bool> editDoctorRecord(
       {String doctorID,
       String firstName,
       String lastName,
@@ -175,13 +172,13 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<HospitalModel> editHospitalRecord(
+  Future<bool> editHospitalRecord(
       {String hospitalID, String name, String location, String contactNo}) {
     // TODO: implement editHospitalRecord
     return null;
   }
 
-  Future<InfantModel> editInfantRecord(
+  Future<bool> editInfantRecord(
       {String infantID,
       String firstName,
       String lastName,
@@ -206,7 +203,7 @@ abstract class IBibawRemoteDataSource {
     return null;
   }
 
-  Future<ParentModel> editParentRecord(
+  Future<bool> editParentRecord(
       {DateTime birthDate,
       String firstName,
       String gender,
