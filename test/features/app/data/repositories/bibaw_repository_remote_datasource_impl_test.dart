@@ -75,7 +75,6 @@ void main() {
         hospitalID: kHospitalID,
         infantID: kInfantID,
       );
-      print(_result);
       expect(_result, equals(Right(true)));
     });
 

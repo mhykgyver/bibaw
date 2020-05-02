@@ -9,5 +9,3 @@ abstract class IFailure extends Equatable {
 class ServerFailure extends IFailure {}
 
 class DatabaseFailure extends IFailure {}
-
-class NullFailure extends IFailure {}
