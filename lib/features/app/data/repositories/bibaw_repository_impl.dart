@@ -35,7 +35,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String infantID,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addAppointment(
+    return Right(await localDataSource.addAppointment(
       appointmentID: appointmentID,
       date: date,
       description: description,
@@ -50,7 +50,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String appointmentID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.deleteAppointment(appointmentID: appointmentID));
+        await localDataSource.deleteAppointment(appointmentID: appointmentID));
   }
 
   @override
@@ -63,7 +63,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String infantID,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editAppointment(
+    return Right(await localDataSource.editAppointment(
       appointmentID: appointmentID,
       date: date,
       description: description,
@@ -77,7 +77,7 @@ class BibawRepositoryImpl implements IBibawRepository {
   Future<Either<IFailure, Appointment>> retrieveAppointment(
       {String appointmentID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.retrieveAppointment(
+    return Right(await localDataSource.retrieveAppointment(
         appointmentID: appointmentID));
   }
 
@@ -94,7 +94,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String instructions,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addCheckup(
+    return Right(await localDataSource.addCheckup(
       checkupID: checkupID,
       circumferenceHead: circumferenceHead,
       date: date,
@@ -109,7 +109,7 @@ class BibawRepositoryImpl implements IBibawRepository {
   @override
   Future<Either<IFailure, bool>> deleteCheckup({String checkupID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.deleteCheckup(checkupID: checkupID));
+    return Right(await localDataSource.deleteCheckup(checkupID: checkupID));
   }
 
   @override
@@ -124,7 +124,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String instructions,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editCheckup(
+    return Right(await localDataSource.editCheckup(
       checkupID: checkupID,
       circumferenceHead: circumferenceHead,
       date: date,
@@ -139,7 +139,7 @@ class BibawRepositoryImpl implements IBibawRepository {
   @override
   Future<Either<IFailure, Checkup>> retrieveCheckup({String checkupID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.retrieveCheckup(checkupID: checkupID));
+    return Right(await localDataSource.retrieveCheckup(checkupID: checkupID));
   }
 
 // DoctorHospital Records Use Cases
@@ -152,7 +152,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String roomNo,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addDoctorHospitalRecord(
+    return Right(await localDataSource.addDoctorHospitalRecord(
       consultationDaysHours: consultationDaysHours,
       contactNo: contactNo,
       doctorID: doctorID,
@@ -166,7 +166,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String doctorID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.deleteDoctorHospitalRecord(doctorID: doctorID));
+        await localDataSource.deleteDoctorHospitalRecord(doctorID: doctorID));
   }
 
   @override
@@ -178,7 +178,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String roomNo,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editDoctorHospitalRecord(
+    return Right(await localDataSource.editDoctorHospitalRecord(
       consultationDaysHours: consultationDaysHours,
       contactNo: contactNo,
       doctorID: doctorID,
@@ -191,8 +191,8 @@ class BibawRepositoryImpl implements IBibawRepository {
   Future<Either<IFailure, DoctorHospital>> retrieveDoctorHospitalRecord(
       {String doctorID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.retrieveDoctorHospitalRecord(
-        doctorID: doctorID));
+    return Right(
+        await localDataSource.retrieveDoctorHospitalRecord(doctorID: doctorID));
   }
 
 // Doctor Records Use Cases
@@ -205,7 +205,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String practice,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addDoctorRecord(
+    return Right(await localDataSource.addDoctorRecord(
       doctorID: doctorID,
       firstName: firstName,
       lastName: lastName,
@@ -217,7 +217,7 @@ class BibawRepositoryImpl implements IBibawRepository {
   @override
   Future<Either<IFailure, bool>> deleteDoctorRecord({String doctorID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.deleteDoctorRecord(doctorID: doctorID));
+    return Right(await localDataSource.deleteDoctorRecord(doctorID: doctorID));
   }
 
   @override
@@ -229,7 +229,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String practice,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editDoctorRecord(
+    return Right(await localDataSource.editDoctorRecord(
       doctorID: doctorID,
       firstName: firstName,
       lastName: lastName,
@@ -243,7 +243,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String doctorID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.retrieveDoctorRecord(doctorID: doctorID));
+        await localDataSource.retrieveDoctorRecord(doctorID: doctorID));
   }
 
 // Hospital Records Use Cases
@@ -254,7 +254,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       String location,
       String contactNo}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addHospitalRecord(
+    return Right(await localDataSource.addHospitalRecord(
       contactNo: contactNo,
       hospitalID: hospitalID,
       location: location,
@@ -267,7 +267,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String hospitalID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.deleteHospitalRecord(hospitalID: hospitalID));
+        await localDataSource.deleteHospitalRecord(hospitalID: hospitalID));
   }
 
   @override
@@ -277,7 +277,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       String location,
       String contactNo}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editHospitalRecord(
+    return Right(await localDataSource.editHospitalRecord(
       contactNo: contactNo,
       hospitalID: hospitalID,
       location: location,
@@ -290,7 +290,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String hospitalID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.retrieveHospitalRecord(hospitalID: hospitalID));
+        await localDataSource.retrieveHospitalRecord(hospitalID: hospitalID));
   }
 
   // Infant Records Use Cases
@@ -318,7 +318,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String hospitalID,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addInfantRecord(
+    return Right(await localDataSource.addInfantRecord(
       birthDate: birthDate,
       birthPlace: birthPlace,
       birthProblems: birthProblems,
@@ -345,7 +345,7 @@ class BibawRepositoryImpl implements IBibawRepository {
   @override
   Future<Either<IFailure, bool>> deleteInfantRecord({String infantID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.deleteInfantRecord(infantID: infantID));
+    return Right(await localDataSource.deleteInfantRecord(infantID: infantID));
   }
 
   @override
@@ -372,7 +372,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String hospitalID,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editInfantRecord(
+    return Right(await localDataSource.editInfantRecord(
       birthDate: birthDate,
       birthPlace: birthPlace,
       birthProblems: birthProblems,
@@ -401,7 +401,7 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String infantID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.retrieveInfantRecord(infantID: infantID));
+        await localDataSource.retrieveInfantRecord(infantID: infantID));
   }
 
 // Parent Records Use Cases
@@ -415,7 +415,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String parentID,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.addParentRecord(
+    return Right(await localDataSource.addParentRecord(
       birthDate: birthDate,
       firstName: firstName,
       gender: gender,
@@ -428,7 +428,7 @@ class BibawRepositoryImpl implements IBibawRepository {
   @override
   Future<Either<IFailure, bool>> deleteParentRecord({String parentID}) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.deleteParentRecord(parentID: parentID));
+    return Right(await localDataSource.deleteParentRecord(parentID: parentID));
   }
 
   @override
@@ -441,7 +441,7 @@ class BibawRepositoryImpl implements IBibawRepository {
     String parentID,
   }) async {
     networkInfo.isConnected;
-    return Right(await remoteDataSource.editParentRecord(
+    return Right(await localDataSource.editParentRecord(
       birthDate: birthDate,
       firstName: firstName,
       gender: gender,
@@ -456,6 +456,6 @@ class BibawRepositoryImpl implements IBibawRepository {
       {String parentID}) async {
     networkInfo.isConnected;
     return Right(
-        await remoteDataSource.retrieveParentRecord(parentID: parentID));
+        await localDataSource.retrieveParentRecord(parentID: parentID));
   }
 }
