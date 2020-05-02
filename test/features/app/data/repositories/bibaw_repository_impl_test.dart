@@ -1,3 +1,5 @@
+import 'package:bibaw_app/core/error/exceptions.dart';
+import 'package:bibaw_app/core/error/failures.dart';
 import 'package:bibaw_app/core/network/network_info.dart';
 import 'package:bibaw_app/features/app/data/datasources/bibaw_local_data_source.dart';
 import 'package:bibaw_app/features/app/data/datasources/bibaw_remote_data_source.dart';
@@ -87,9 +89,37 @@ void main() {
     });
   }
 
+  void runConnectionTests(Function body) {
+    group('connection tests -->', () {
+      body();
+    });
+  }
+
+  void runDatabaseTests(Function body) {
+    group('database tests -->', () {
+      body();
+    });
+  }
+
   group('device offline tests -->', () {
     setUp(() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+    });
+    runDatabaseTests(() {
+      group('database connectivity -->', () {
+        test('should return database failure when database access fails',
+            () async {
+          when(_mockLocalDataSource.retrieveAppointment(
+                  appointmentID: kAppointmentID))
+              .thenThrow(DatabaseException());
+          final _result = await _repository.retrieveAppointment(
+              appointmentID: kAppointmentID);
+          verifyZeroInteractions(_mockRemoteDataSource);
+          verify(_mockLocalDataSource.retrieveAppointment(
+              appointmentID: kAppointmentID));
+          expect(_result, equals(Left(DatabaseFailure())));
+        });
+      });
     });
     runAppointmentUseCasesTests(() {
       group('use cases -->', () {
@@ -103,7 +133,7 @@ void main() {
         );
         final Appointment _tAppointment = _tAppointmentModel;
 
-        test('add new appointment record', () async {
+        test('should add new appointment record', () async {
           when(
             _mockLocalDataSource.addAppointment(
               appointmentID: kAppointmentID,
@@ -135,7 +165,7 @@ void main() {
           );
           expect(result, equals(Right(true)));
         });
-        test('edit appointment record', () async {
+        test('should edit appointment record', () async {
           when(_mockLocalDataSource.editAppointment(
             appointmentID: kAppointmentID,
             date: DateTime.parse("2020-12-05 20:18:04.000Z"),
@@ -165,7 +195,7 @@ void main() {
           );
           expect(result, equals(Right(true)));
         });
-        test('delete appointment record', () async {
+        test('should delete appointment record', () async {
           when(
             _mockLocalDataSource.deleteAppointment(
                 appointmentID: kAppointmentID),
@@ -179,7 +209,7 @@ void main() {
           );
           expect(result, equals(Right(true)));
         });
-        test('retrieve appointment record', () async {
+        test('should retrieve appointment record', () async {
           when(
             _mockLocalDataSource.retrieveAppointment(
                 appointmentID: kAppointmentID),
@@ -208,7 +238,7 @@ void main() {
           weight: 20.0,
         );
         final Checkup _tCheckup = _tCheckupModel;
-        test('add new checkup record', () async {
+        test('should add new checkup record', () async {
           when(_mockLocalDataSource.addCheckup(
             checkupID: kCheckupID,
             circumferenceHead: 33.1,
@@ -245,7 +275,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit checkup record', () async {
+        test('should edit checkup record', () async {
           when(_mockLocalDataSource.editCheckup(
             checkupID: kCheckupID,
             circumferenceHead: 33.1,
@@ -282,7 +312,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete checkup record', () async {
+        test('should delete checkup record', () async {
           when(_mockLocalDataSource.deleteCheckup(checkupID: kCheckupID))
               .thenAnswer((_) async => true);
           final result = await _repository.deleteCheckup(checkupID: kCheckupID);
@@ -293,7 +323,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve checkup record', () async {
+        test('should retrieve checkup record', () async {
           when(_mockLocalDataSource.retrieveCheckup(checkupID: kCheckupID))
               .thenAnswer((_) async => _tCheckupModel);
           final result =
@@ -317,7 +347,7 @@ void main() {
         );
         final DoctorHospital _tDoctorHospital = _tDoctorHospitalModel;
 
-        test('add new doctor hospital record', () async {
+        test('should add new doctor hospital record', () async {
           when(_mockLocalDataSource.addDoctorHospitalRecord(
             doctorID: kDoctorID,
             hospitalID: kHospitalID,
@@ -345,7 +375,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit doctor hospital record', () async {
+        test('should edit doctor hospital record', () async {
           when(_mockLocalDataSource.editDoctorHospitalRecord(
             doctorID: kDoctorID,
             hospitalID: kHospitalID,
@@ -373,7 +403,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete doctor hospital record', () async {
+        test('should delete doctor hospital record', () async {
           when(_mockLocalDataSource.deleteDoctorHospitalRecord(
                   doctorID: kDoctorID))
               .thenAnswer((_) async => true);
@@ -387,7 +417,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve doctor hospital record', () async {
+        test('should retrieve doctor hospital record', () async {
           when(_mockLocalDataSource.retrieveDoctorHospitalRecord(
                   doctorID: kDoctorID))
               .thenAnswer((_) async => _tDoctorHospitalModel);
@@ -413,7 +443,7 @@ void main() {
         );
         final Doctor _tDoctor = _tDoctorModel;
 
-        test('add new doctor record', () async {
+        test('should add new doctor record', () async {
           when(_mockLocalDataSource.addDoctorRecord(
             doctorID: kDoctorID,
             firstName: 'Doctor',
@@ -441,7 +471,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit doctor record', () async {
+        test('should edit doctor record', () async {
           when(_mockLocalDataSource.editDoctorRecord(
             doctorID: kDoctorID,
             firstName: 'Doctor',
@@ -469,7 +499,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete doctor record', () async {
+        test('should delete doctor record', () async {
           when(_mockLocalDataSource.deleteDoctorRecord(doctorID: kDoctorID))
               .thenAnswer((_) async => true);
           final result =
@@ -481,7 +511,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve doctor record', () async {
+        test('should retrieve doctor record', () async {
           when(_mockLocalDataSource.retrieveDoctorRecord(doctorID: kDoctorID))
               .thenAnswer((_) async => _tDoctorModel);
           final result =
@@ -504,7 +534,7 @@ void main() {
         );
         final Hospital _tHospital = _tHospitalModel;
 
-        test('add new hospital record', () async {
+        test('should add new hospital record', () async {
           when(_mockLocalDataSource.addHospitalRecord(
             contactNo: '1234567',
             hospitalID: kHospitalID,
@@ -529,7 +559,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit hospital record', () async {
+        test('should edit hospital record', () async {
           when(_mockLocalDataSource.editHospitalRecord(
             contactNo: '1234567',
             hospitalID: kHospitalID,
@@ -554,7 +584,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete hospital record', () async {
+        test('should delete hospital record', () async {
           when(_mockLocalDataSource.deleteHospitalRecord(
                   hospitalID: kHospitalID))
               .thenAnswer((_) async => true);
@@ -567,7 +597,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve hospital record', () async {
+        test('should retrieve hospital record', () async {
           when(_mockLocalDataSource.retrieveHospitalRecord(
                   hospitalID: kHospitalID))
               .thenAnswer((_) async => _tHospitalModel);
@@ -608,7 +638,7 @@ void main() {
         );
         final Infant _tInfant = _tInfantModel;
 
-        test('add new infant record', () async {
+        test('should add new infant record', () async {
           when(_mockLocalDataSource.addInfantRecord(
             infantID: kInfantID,
             firstName: 'Baby',
@@ -681,7 +711,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit infant record', () async {
+        test('should edit infant record', () async {
           when(_mockLocalDataSource.editInfantRecord(
             infantID: kInfantID,
             firstName: 'Baby',
@@ -754,7 +784,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete infant record', () async {
+        test('should delete infant record', () async {
           when(_mockLocalDataSource.deleteInfantRecord(infantID: kInfantID))
               .thenAnswer((_) async => true);
           final result =
@@ -765,7 +795,7 @@ void main() {
           );
           expect(result, equals(Right(true)));
         });
-        test('retrieve infant record', () async {
+        test('should retrieve infant record', () async {
           when(_mockLocalDataSource.retrieveInfantRecord(infantID: kInfantID))
               .thenAnswer((_) async => _tInfantModel);
           final result =
@@ -790,7 +820,7 @@ void main() {
         );
         final Parent _tParent = _tParentModel;
 
-        test('add new parent record', () async {
+        test('should add new parent record', () async {
           when(_mockLocalDataSource.addParentRecord(
             birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
             firstName: 'Mommy',
@@ -821,7 +851,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit parent record', () async {
+        test('should edit parent record', () async {
           when(_mockLocalDataSource.editParentRecord(
             birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
             firstName: 'Mommy',
@@ -852,7 +882,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete parent record', () async {
+        test('should delete parent record', () async {
           when(_mockLocalDataSource.deleteParentRecord(parentID: kParentID))
               .thenAnswer((_) async => true);
           final result =
@@ -864,7 +894,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve parent record', () async {
+        test('should retrieve parent record', () async {
           when(_mockLocalDataSource.retrieveParentRecord(parentID: kParentID))
               .thenAnswer((_) async => _tParentModel);
           final result =
@@ -883,6 +913,28 @@ void main() {
     setUp(() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
+    runConnectionTests(() {
+      group('server connectivity -->', () {
+        test('should check if device is online', () async {
+          when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+          _repository.retrieveAppointment(appointmentID: kAppointmentID);
+          verify(_mockNetworkInfo.isConnected);
+        });
+        test('should return server failure when server is unreachable',
+            () async {
+          when(_mockRemoteDataSource.retrieveAppointment(
+                  appointmentID: kAppointmentID))
+              .thenThrow(ServerException());
+          final _result = await _repository.retrieveAppointment(
+              appointmentID: kAppointmentID);
+          print(_result);
+          verify(_mockRemoteDataSource.retrieveAppointment(
+              appointmentID: kAppointmentID));
+          verifyZeroInteractions(_mockLocalDataSource);
+          expect(_result, equals(Left(ServerFailure())));
+        });
+      });
+    });
     runAppointmentUseCasesTests(() {
       group('use cases -->', () {
         final _tAppointmentModel = AppointmentModel(
@@ -895,7 +947,7 @@ void main() {
         );
         final Appointment _tAppointment = _tAppointmentModel;
 
-        test('add new appointment record', () async {
+        test('should add new appointment record', () async {
           when(_mockRemoteDataSource.addAppointment(
             appointmentID: kAppointmentID,
             date: DateTime.parse("2020-12-05 20:18:04.000Z"),
@@ -915,7 +967,7 @@ void main() {
           expect(_result, equals(Right(true)));
         });
 
-        test('edit appointment record', () async {
+        test('should edit appointment record', () async {
           when(_mockRemoteDataSource.editAppointment(
             appointmentID: kAppointmentID,
             date: DateTime.parse("2020-12-05 20:18:04.000Z"),
@@ -935,7 +987,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete appointment record', () async {
+        test('should delete appointment record', () async {
           when(_mockRemoteDataSource.deleteAppointment(
                   appointmentID: kAppointmentID))
               .thenAnswer((_) async => true);
@@ -944,7 +996,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve appointment record', () async {
+        test('should retrieve appointment record', () async {
           when(_mockRemoteDataSource.retrieveAppointment(
                   appointmentID: kAppointmentID))
               .thenAnswer((_) async => _tAppointmentModel);
@@ -968,7 +1020,7 @@ void main() {
         );
         final Checkup _tCheckup = _tCheckupModel;
 
-        test('add new checkup record', () async {
+        test('should add new checkup record', () async {
           when(_mockRemoteDataSource.addCheckup(
             checkupID: kCheckupID,
             circumferenceHead: 33.1,
@@ -992,7 +1044,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit checkup record', () async {
+        test('should edit checkup record', () async {
           when(_mockRemoteDataSource.editCheckup(
             checkupID: kCheckupID,
             circumferenceHead: 33.1,
@@ -1016,14 +1068,14 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete checkup record', () async {
+        test('should delete checkup record', () async {
           when(_mockRemoteDataSource.deleteCheckup(checkupID: kCheckupID))
               .thenAnswer((_) async => true);
           final result = await _repository.deleteCheckup(checkupID: kCheckupID);
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve checkup record', () async {
+        test('should retrieve checkup record', () async {
           when(_mockRemoteDataSource.retrieveCheckup(checkupID: kCheckupID))
               .thenAnswer((_) async => _tCheckupModel);
           final result =
@@ -1043,7 +1095,7 @@ void main() {
         );
         final DoctorHospital _tDoctorHospital = _tDoctorHospitalModel;
 
-        test('add new doctor hospital record', () async {
+        test('should add new doctor hospital record', () async {
           when(_mockRemoteDataSource.addDoctorHospitalRecord(
             doctorID: kDoctorID,
             hospitalID: kHospitalID,
@@ -1061,7 +1113,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit doctor hospital record', () async {
+        test('should edit doctor hospital record', () async {
           when(_mockRemoteDataSource.editDoctorHospitalRecord(
             doctorID: kDoctorID,
             hospitalID: kHospitalID,
@@ -1079,7 +1131,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete doctor hospital record', () async {
+        test('should delete doctor hospital record', () async {
           when(_mockRemoteDataSource.deleteDoctorHospitalRecord(
                   doctorID: kDoctorID))
               .thenAnswer((_) async => true);
@@ -1088,7 +1140,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve doctor hospital record', () async {
+        test('should retrieve doctor hospital record', () async {
           when(_mockRemoteDataSource.retrieveDoctorHospitalRecord(
                   doctorID: kDoctorID))
               .thenAnswer((_) async => _tDoctorHospitalModel);
@@ -1109,7 +1161,7 @@ void main() {
         );
         final Doctor _tDoctor = _tDoctorModel;
 
-        test('add new doctor record', () async {
+        test('should add new doctor record', () async {
           when(_mockRemoteDataSource.addDoctorRecord(
             doctorID: kDoctorID,
             firstName: 'Doctor',
@@ -1127,7 +1179,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit doctor record', () async {
+        test('should edit doctor record', () async {
           when(_mockRemoteDataSource.editDoctorRecord(
             doctorID: kDoctorID,
             firstName: 'Doctor',
@@ -1145,7 +1197,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete doctor record', () async {
+        test('should delete doctor record', () async {
           when(_mockRemoteDataSource.deleteDoctorRecord(doctorID: kDoctorID))
               .thenAnswer((_) async => true);
           final result =
@@ -1153,7 +1205,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve doctor record', () async {
+        test('should retrieve doctor record', () async {
           when(_mockRemoteDataSource.retrieveDoctorRecord(doctorID: kDoctorID))
               .thenAnswer((_) async => _tDoctorModel);
           final result =
@@ -1172,7 +1224,7 @@ void main() {
         );
         final Hospital _tHospital = _tHospitalModel;
 
-        test('add new hospital record', () async {
+        test('should add new hospital record', () async {
           when(_mockRemoteDataSource.addHospitalRecord(
             contactNo: '1234567',
             hospitalID: kHospitalID,
@@ -1188,7 +1240,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit hospital record', () async {
+        test('should edit hospital record', () async {
           when(_mockRemoteDataSource.editHospitalRecord(
             contactNo: '1234567',
             hospitalID: kHospitalID,
@@ -1204,7 +1256,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete hospital record', () async {
+        test('should delete hospital record', () async {
           when(_mockRemoteDataSource.deleteHospitalRecord(
                   hospitalID: kHospitalID))
               .thenAnswer((_) async => true);
@@ -1213,7 +1265,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve hospital record', () async {
+        test('should retrieve hospital record', () async {
           when(_mockRemoteDataSource.retrieveHospitalRecord(
                   hospitalID: kHospitalID))
               .thenAnswer((_) async => _tHospitalModel);
@@ -1249,7 +1301,7 @@ void main() {
         );
         final Infant _tInfant = _tInfantModel;
 
-        test('add new infant record', () async {
+        test('should add new infant record', () async {
           when(_mockRemoteDataSource.addInfantRecord(
             infantID: kInfantID,
             firstName: 'Baby',
@@ -1297,7 +1349,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit infant record', () async {
+        test('should edit infant record', () async {
           when(_mockRemoteDataSource.editInfantRecord(
             infantID: kInfantID,
             firstName: 'Baby',
@@ -1345,7 +1397,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete infant record', () async {
+        test('should delete infant record', () async {
           when(_mockRemoteDataSource.deleteInfantRecord(infantID: kInfantID))
               .thenAnswer((_) async => true);
           final result =
@@ -1353,7 +1405,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve infant record', () async {
+        test('should retrieve infant record', () async {
           when(_mockRemoteDataSource.retrieveInfantRecord(infantID: kInfantID))
               .thenAnswer((_) async => _tInfantModel);
           final result =
@@ -1373,7 +1425,7 @@ void main() {
           middleInitial: 'P',
         );
         final Parent _tParent = _tParentModel;
-        test('add new parent record', () async {
+        test('should add new parent record', () async {
           when(_mockRemoteDataSource.addParentRecord(
             birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
             firstName: 'Mommy',
@@ -1393,7 +1445,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('edit parent record', () async {
+        test('should edit parent record', () async {
           when(_mockRemoteDataSource.editParentRecord(
             birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
             firstName: 'Mommy',
@@ -1413,7 +1465,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('delete parent record', () async {
+        test('should delete parent record', () async {
           when(_mockRemoteDataSource.deleteParentRecord(parentID: kParentID))
               .thenAnswer((_) async => true);
           final result =
@@ -1421,7 +1473,7 @@ void main() {
           expect(result, equals(Right(true)));
         });
 
-        test('retrieve parent record', () async {
+        test('should retrieve parent record', () async {
           when(_mockRemoteDataSource.retrieveParentRecord(parentID: kParentID))
               .thenAnswer((_) async => _tParentModel);
           final result =

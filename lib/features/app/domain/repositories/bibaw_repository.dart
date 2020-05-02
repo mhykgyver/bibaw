@@ -9,6 +9,8 @@ import '../entities/hospital.dart';
 import '../entities/infant.dart';
 import '../entities/parent.dart';
 
+// TODO: refactor by entity repository
+
 abstract class IBibawRepository {
   // Appointments
   Future<Either<IFailure, bool>> addAppointment({
