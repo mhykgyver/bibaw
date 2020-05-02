@@ -59,7 +59,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new appointment record', () async {
-      when(_mockLocalDataSource.addAppointment(
+      when(_mockRemoteDataSource.addAppointment(
         appointmentID: kAppointmentID,
         date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         description: "test description",
@@ -67,7 +67,7 @@ void main() {
         hospitalID: kHospitalID,
         infantID: kInfantID,
       )).thenAnswer((_) async => true);
-      final result = await _repository.addAppointment(
+      final _result = await _repository.addAppointment(
         appointmentID: kAppointmentID,
         date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         description: "test description",
@@ -75,11 +75,12 @@ void main() {
         hospitalID: kHospitalID,
         infantID: kInfantID,
       );
-      expect(result, equals(Right(true)));
+      print(_result);
+      expect(_result, equals(Right(true)));
     });
 
     test('edit appointment record', () async {
-      when(_mockLocalDataSource.editAppointment(
+      when(_mockRemoteDataSource.editAppointment(
         appointmentID: kAppointmentID,
         date: DateTime.parse("2020-12-05 20:18:04.000Z"),
         description: "test description",
@@ -99,7 +100,7 @@ void main() {
     });
 
     test('delete appointment record', () async {
-      when(_mockLocalDataSource.deleteAppointment(
+      when(_mockRemoteDataSource.deleteAppointment(
               appointmentID: kAppointmentID))
           .thenAnswer((_) async => true);
       final result =
@@ -108,7 +109,7 @@ void main() {
     });
 
     test('retrieve appointment record', () async {
-      when(_mockLocalDataSource.retrieveAppointment(
+      when(_mockRemoteDataSource.retrieveAppointment(
               appointmentID: kAppointmentID))
           .thenAnswer((_) async => _tAppointmentModel);
       final result =
@@ -134,7 +135,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new checkup record', () async {
-      when(_mockLocalDataSource.addCheckup(
+      when(_mockRemoteDataSource.addCheckup(
         checkupID: kCheckupID,
         circumferenceHead: 33.1,
         date: DateTime.parse("2020-12-05 20:18:04.000Z"),
@@ -158,7 +159,7 @@ void main() {
     });
 
     test('edit checkup record', () async {
-      when(_mockLocalDataSource.editCheckup(
+      when(_mockRemoteDataSource.editCheckup(
         checkupID: kCheckupID,
         circumferenceHead: 33.1,
         date: DateTime.parse("2020-12-05 20:18:04.000Z"),
@@ -182,14 +183,14 @@ void main() {
     });
 
     test('delete checkup record', () async {
-      when(_mockLocalDataSource.deleteCheckup(checkupID: kCheckupID))
+      when(_mockRemoteDataSource.deleteCheckup(checkupID: kCheckupID))
           .thenAnswer((_) async => true);
       final result = await _repository.deleteCheckup(checkupID: kCheckupID);
       expect(result, equals(Right(true)));
     });
 
     test('retrieve checkup record', () async {
-      when(_mockLocalDataSource.retrieveCheckup(checkupID: kCheckupID))
+      when(_mockRemoteDataSource.retrieveCheckup(checkupID: kCheckupID))
           .thenAnswer((_) async => _tCheckupModel);
       final result = await _repository.retrieveCheckup(checkupID: kCheckupID);
       expect(result, equals(Right(_tCheckup)));
@@ -210,7 +211,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new doctor hospital record', () async {
-      when(_mockLocalDataSource.addDoctorHospitalRecord(
+      when(_mockRemoteDataSource.addDoctorHospitalRecord(
         doctorID: kDoctorID,
         hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
@@ -228,7 +229,7 @@ void main() {
     });
 
     test('edit doctor hospital record', () async {
-      when(_mockLocalDataSource.editDoctorHospitalRecord(
+      when(_mockRemoteDataSource.editDoctorHospitalRecord(
         doctorID: kDoctorID,
         hospitalID: kHospitalID,
         consultationDaysHours: "M10-12/M14-16",
@@ -246,7 +247,8 @@ void main() {
     });
 
     test('delete doctor hospital record', () async {
-      when(_mockLocalDataSource.deleteDoctorHospitalRecord(doctorID: kDoctorID))
+      when(_mockRemoteDataSource.deleteDoctorHospitalRecord(
+              doctorID: kDoctorID))
           .thenAnswer((_) async => true);
       final result =
           await _repository.deleteDoctorHospitalRecord(doctorID: kDoctorID);
@@ -254,7 +256,7 @@ void main() {
     });
 
     test('retrieve doctor hospital record', () async {
-      when(_mockLocalDataSource.retrieveDoctorHospitalRecord(
+      when(_mockRemoteDataSource.retrieveDoctorHospitalRecord(
               doctorID: kDoctorID))
           .thenAnswer((_) async => _tDoctorHospitalModel);
       final result =
@@ -277,7 +279,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new doctor record', () async {
-      when(_mockLocalDataSource.addDoctorRecord(
+      when(_mockRemoteDataSource.addDoctorRecord(
         doctorID: kDoctorID,
         firstName: 'Doctor',
         lastName: 'Who',
@@ -295,7 +297,7 @@ void main() {
     });
 
     test('edit doctor record', () async {
-      when(_mockLocalDataSource.editDoctorRecord(
+      when(_mockRemoteDataSource.editDoctorRecord(
         doctorID: kDoctorID,
         firstName: 'Doctor',
         lastName: 'Who',
@@ -313,14 +315,14 @@ void main() {
     });
 
     test('delete doctor record', () async {
-      when(_mockLocalDataSource.deleteDoctorRecord(doctorID: kDoctorID))
+      when(_mockRemoteDataSource.deleteDoctorRecord(doctorID: kDoctorID))
           .thenAnswer((_) async => true);
       final result = await _repository.deleteDoctorRecord(doctorID: kDoctorID);
       expect(result, equals(Right(true)));
     });
 
     test('retrieve doctor record', () async {
-      when(_mockLocalDataSource.retrieveDoctorRecord(doctorID: kDoctorID))
+      when(_mockRemoteDataSource.retrieveDoctorRecord(doctorID: kDoctorID))
           .thenAnswer((_) async => _tDoctorModel);
       final result =
           await _repository.retrieveDoctorRecord(doctorID: kDoctorID);
@@ -341,7 +343,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new hospital record', () async {
-      when(_mockLocalDataSource.addHospitalRecord(
+      when(_mockRemoteDataSource.addHospitalRecord(
         contactNo: '1234567',
         hospitalID: kHospitalID,
         location: 'test location',
@@ -357,7 +359,7 @@ void main() {
     });
 
     test('edit hospital record', () async {
-      when(_mockLocalDataSource.editHospitalRecord(
+      when(_mockRemoteDataSource.editHospitalRecord(
         contactNo: '1234567',
         hospitalID: kHospitalID,
         location: 'test location',
@@ -373,7 +375,7 @@ void main() {
     });
 
     test('delete hospital record', () async {
-      when(_mockLocalDataSource.deleteHospitalRecord(hospitalID: kHospitalID))
+      when(_mockRemoteDataSource.deleteHospitalRecord(hospitalID: kHospitalID))
           .thenAnswer((_) async => true);
       final result =
           await _repository.deleteHospitalRecord(hospitalID: kHospitalID);
@@ -381,7 +383,8 @@ void main() {
     });
 
     test('retrieve hospital record', () async {
-      when(_mockLocalDataSource.retrieveHospitalRecord(hospitalID: kHospitalID))
+      when(_mockRemoteDataSource.retrieveHospitalRecord(
+              hospitalID: kHospitalID))
           .thenAnswer((_) async => _tHospitalModel);
       final result =
           await _repository.retrieveHospitalRecord(hospitalID: kHospitalID);
@@ -418,7 +421,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new infant record', () async {
-      when(_mockLocalDataSource.addInfantRecord(
+      when(_mockRemoteDataSource.addInfantRecord(
         infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
@@ -466,7 +469,7 @@ void main() {
     });
 
     test('edit infant record', () async {
-      when(_mockLocalDataSource.editInfantRecord(
+      when(_mockRemoteDataSource.editInfantRecord(
         infantID: kInfantID,
         firstName: 'Baby',
         lastName: 'Girl',
@@ -514,14 +517,14 @@ void main() {
     });
 
     test('delete infant record', () async {
-      when(_mockLocalDataSource.deleteInfantRecord(infantID: kInfantID))
+      when(_mockRemoteDataSource.deleteInfantRecord(infantID: kInfantID))
           .thenAnswer((_) async => true);
       final result = await _repository.deleteInfantRecord(infantID: kInfantID);
       expect(result, equals(Right(true)));
     });
 
     test('retrieve infant record', () async {
-      when(_mockLocalDataSource.retrieveInfantRecord(infantID: kInfantID))
+      when(_mockRemoteDataSource.retrieveInfantRecord(infantID: kInfantID))
           .thenAnswer((_) async => _tInfantModel);
       final result =
           await _repository.retrieveInfantRecord(infantID: kInfantID);
@@ -544,7 +547,7 @@ void main() {
       when(_mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
     test('add new parent record', () async {
-      when(_mockLocalDataSource.addParentRecord(
+      when(_mockRemoteDataSource.addParentRecord(
         birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
         firstName: 'Mommy',
         gender: 'F',
@@ -564,7 +567,7 @@ void main() {
     });
 
     test('edit parent record', () async {
-      when(_mockLocalDataSource.editParentRecord(
+      when(_mockRemoteDataSource.editParentRecord(
         birthDate: DateTime.parse("1983-10-29 20:18:04Z"),
         firstName: 'Mommy',
         gender: 'F',
@@ -584,14 +587,14 @@ void main() {
     });
 
     test('delete parent record', () async {
-      when(_mockLocalDataSource.deleteParentRecord(parentID: kParentID))
+      when(_mockRemoteDataSource.deleteParentRecord(parentID: kParentID))
           .thenAnswer((_) async => true);
       final result = await _repository.deleteParentRecord(parentID: kParentID);
       expect(result, equals(Right(true)));
     });
 
     test('retrieve parent record', () async {
-      when(_mockLocalDataSource.retrieveParentRecord(parentID: kParentID))
+      when(_mockRemoteDataSource.retrieveParentRecord(parentID: kParentID))
           .thenAnswer((_) async => _tParentModel);
       final result =
           await _repository.retrieveParentRecord(parentID: kParentID);
